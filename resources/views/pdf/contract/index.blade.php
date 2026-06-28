@@ -35,7 +35,7 @@
 <body>
     <header class="header">
         <div class="img">
-            <img src="dashboard/assets/img/insignia.png" alt="">
+            <img src="dashboard/assets/img/logo-sge-small.png" alt="">
         </div>
         <div class="text-center">REPÚBLICA DE ANGOLA</div>
         <div class="text-center">MINISTÉRIO DA EDUCAÇÃO</div>
@@ -45,6 +45,9 @@
 
     <main>
         <div class="main">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="{{ public_path('dashboard/assets/img/logo-sge-small.png') }}" alt="Logo da Escola" style="height: 80px;">
+            </div>
             @if ($teacherSchoolYear->count() <= 0)
             <hr>
                 <div class="text-center">  Não Existe nenhum professor cadastrado neste ano lectivo</div>
@@ -56,7 +59,6 @@
                             <th>Professor</th>
                             <th>Cargo</th>
                             <th>Turma</th>
-                            <th>Disciplina</th>
                             <th>Ano Lectivo</th>
                             <th>Turno</th>
                         </tr>
@@ -68,7 +70,6 @@
                                 <td>{{ $item->teachers->name }}</td>
                                 <td>{{ $item->rules->name }}</td>
                                 <td>{{ $item->classes->name }}</td>
-                                <td>{{ $item->subjects->name }}</td>
                                 <td>{{ $item->schoolyears->name }}</td>
                                 <td>{{ $item->season }}</td>
                             </tr>

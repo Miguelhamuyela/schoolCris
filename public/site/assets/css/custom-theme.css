@@ -1,0 +1,279 @@
+:root {
+    --blue: #E65C00;
+    --indigo: #CC5200;
+    --purple: #D94D00;
+    --orange: #B34700;
+    --primary: #E65C00;
+    --primary-darker: #CC5200;
+}
+
+/* Bootstrap overrides */
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active {
+    background-color: var(--primary-darker) !important;
+    border-color: var(--primary-darker) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+a {
+    color: var(--primary);
+}
+
+a:hover {
+    color: var(--primary-darker);
+}
+
+/* Specific styles for site pages */
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.back-to-top {
+    background: var(--primary);
+}
+
+.back-to-top:hover {
+    background: var(--primary-darker);
+}
+
+/* Header navigation */
+#header {
+    background: rgba(255, 128, 0, 0.9);
+}
+
+.navbar a:hover, 
+.navbar .active, 
+.navbar .active:focus, 
+.navbar li:hover > a {
+    color: var(--primary);
+}
+
+/* General links color */
+body a {
+    color: var(--primary);
+}
+
+body a:hover,
+body a:active,
+body a:focus {
+    color: var(--primary-darker);
+}
+
+/* Social links */
+#header .social-links a:hover {
+    color: var(--primary);
+}
+
+/* Buttons in intro section */
+.intro .intro-info .btn-get-started, 
+.intro .intro-info .btn-services {
+    background: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.intro .intro-info .btn-get-started:hover, 
+.intro .intro-info .btn-services:hover {
+    background: var(--primary-darker);
+    border-color: var(--primary-darker);
+}
+
+/* Footer */
+#footer .footer-top .social-links a:hover {
+    background: var(--primary);
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(255, 128, 0, 0.25);
+}
+
+/* Links in footer */
+#footer .footer-top h4::after {
+    background: var(--primary);
+}
+
+#footer .footer-top .footer-links ul a:hover {
+    color: var(--primary);
+}
+
+/* Login page specific */
+.divider:after,
+.divider:before {
+    background: rgba(255, 128, 0, 0.2);
+}
+
+/* Other elements */
+.about-img .about-img-overlay {
+    background: rgba(255, 128, 0, 0.85);
+}
+
+.services .icon-box:hover {
+    border-color: var(--primary);
+}
+
+.services .icon-box:hover .icon i {
+    color: var(--primary);
+}
+
+.services .icon-box:hover .title a {
+    color: var(--primary);
+}
+
+.section-header h3::after {
+    background: var(--primary);
+}
+
+.section-bg {
+    background-color: rgba(255, 128, 0, 0.05);
+}
+
+/* Call to action section */
+.call-to-action {
+    background: linear-gradient(rgba(0, 142, 99, 0.1), rgba(0, 0, 0, 0.1)), url(../img/call-to-action-bg.jpg) center top no-repeat;
+    background-size: cover;
+}
+
+.call-to-action .cta-btn {
+    background: var(--primary);
+    color: #fff;
+}
+
+.call-to-action .cta-btn:hover {
+    background: var(--primary-darker);
+}
+
+/* Hero section */
+#hero .intro-info h2 span {
+    color: var(--primary);
+}
+
+/* Portfolio section */
+#portfolio #portfolio-flters li:hover,
+#portfolio #portfolio-flters li.filter-active {
+    color: var(--primary);
+}
+
+#portfolio .portfolio-item .portfolio-wrap .portfolio-info h4 a:hover {
+    color: var(--primary);
+}
+
+#portfolio .portfolio-item .portfolio-wrap .portfolio-info .link-preview:hover,
+#portfolio .portfolio-item .portfolio-wrap .portfolio-info .link-details:hover {
+    background: var(--primary);
+}
+
+/* Testimonials section */
+#testimonials .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: var(--primary);
+}
+
+/* Team section */
+#team .member .social a:hover {
+    color: var(--primary);
+}
+
+/* Pricing section */
+#pricing .card:hover {
+    border-color: var(--primary);
+}
+
+#pricing .card .btn {
+    background: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+#pricing .card .btn:hover {
+    background-color: var(--primary-darker);
+}
+
+/* Mobile navigation */
+.navbar-mobile a:hover, 
+.navbar-mobile .active, 
+.navbar-mobile li:hover > a {
+    color: var(--primary);
+}
+
+.navbar-mobile .dropdown ul a:hover, 
+.navbar-mobile .dropdown ul .active:hover, 
+.navbar-mobile .dropdown ul li:hover > a {
+    color: var(--primary);
+}
+
+/* Estilos para tornar as logos circulares */
+.logo img, 
+.sidebar-brand-icon img,
+.login-logo img {
+    border-radius: 50%;
+    background-color: #E65C00;
+    padding: 8px;
+    border: 2px solid #CC5200;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover, 
+.sidebar-brand-icon img:hover,
+.login-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Ajuste específico para a logo principal */
+.logo img {
+    max-height: 80px;
+    min-height: 80px;
+    width: auto;
+    display: block;
+    margin: 0 15px;
+    padding: 5px;
+    background-color: white;
+    border: 3px solid #E65C00;
+}
+
+/* Estilo adicional para o container da logo principal */
+header .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+/* Estilo para o texto ao lado da logo */
+header h1 {
+    margin-left: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+
+header h1:hover {
+    color: #CC5200 !important;
+}
+
+/* Ajuste específico para a logo do dashboard */
+.sidebar-brand-icon img {
+    max-width: 40px;
+    height: auto;
+    display: block;
+}
+
+/* Ajuste específico para a logo da página de login */
+.login-logo img {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 0 auto 30px auto;
+    display: block;
+    padding: 15px;
+    background-color: white;
+    border: 3px solid #E65C00;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+} 

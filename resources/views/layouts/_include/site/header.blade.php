@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-    <title>SGE - @yield('title')</title>
+    <title>{{ config('app.name') }} - @yield('title')</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
   
@@ -21,6 +21,8 @@
   
     <!-- Template Main CSS File -->
     <link href="/site/assets/css/style.css" rel="stylesheet">
+    <!-- Custom Theme CSS - Tema Laranja -->
+    <link href="/site/assets/css/custom-theme.css" rel="stylesheet">
 
     <style>
       .bbtn {

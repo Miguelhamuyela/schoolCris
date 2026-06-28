@@ -13,10 +13,11 @@ class CreateSchoolyearsTable extends Migration
      */
     public function up()
     {
-        Schema::create('schoolyears', function (Blueprint $table) {
+        Schema::create('anos_lectivos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('details', 500);
+            $table->boolean('is_current')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +30,6 @@ class CreateSchoolyearsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schoolyears');
+        Schema::dropIfExists('anos_lectivos');
     }
 }

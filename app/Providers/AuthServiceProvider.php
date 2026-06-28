@@ -31,13 +31,8 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('access-registrador', function ($user) {
-            // Verifique se o usuário tem o nível de acesso "registrador"
-            return $user->hasRole('registrador');
-        });
-
-        Gate::define('access-gerenciador', function ($user) {
-            // Verifique se o usuário tem o nível de acesso "gerenciador"
-            return $user->hasRole('gerenciador');
+            // Verifique se o usuário tem o nível de acesso "Secretaria"
+            return $user->hasRole('Secretaria');
         });
     }
 }

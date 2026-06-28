@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SGE - @yield('title')</title>
+    <title>{{ config('app.name') }} - @yield('title')</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="/dashboard/assets/img/favicon.ico">
 
@@ -21,7 +21,21 @@
 
     <!-- Custom styles for this template-->
     <link href="/dashboard/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Global Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Theme CSS - Tema Laranja -->
+    <link href="/dashboard/assets/css/custom-theme.css" rel="stylesheet">
+    <!-- Dark Mode CSS -->
+    <link href="/dashboard/assets/css/dark-mode.css" rel="stylesheet">
     <link href="/dashboard/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Custom Sidebar Dropdown Styles -->
+    <link href="/dashboard/assets/css/custom-sidebar.css" rel="stylesheet">
+    <!-- Custom Form Fields Styles -->
+    <link href="/dashboard/assets/css/custom-forms.css" rel="stylesheet">
 
     {{-- sweetalert --}}
     <link rel="stylesheet" href="/dashboard/assets/css/sweetalert2.min.css">

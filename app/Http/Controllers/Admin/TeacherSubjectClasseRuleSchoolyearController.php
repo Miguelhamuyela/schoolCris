@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\SchoolYearHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use App\Models\Rule;
 use App\Models\Schoolyear;
-use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\TeacherSubjectClasseRuleSchoolyear;
 use Illuminate\Http\Request;
@@ -34,10 +34,8 @@ class TeacherSubjectClasseRuleSchoolyearController extends Controller
     public function create()
     {
         $response['teachers'] = Teacher::OrderBy('id','Desc')->get();
-        $response['subjects'] = Subject::OrderBy('id','Desc')->get();
         $response['classes'] = Classe::OrderBy('id','Desc')->get();
         $response['rules'] = Rule::OrderBy('id','Desc')->get();
-        $response['schoolyears'] = Schoolyear::OrderBy('id','Desc')->get();
         $this->Logger->log('info', 'Admitir Professor');
         return view('admin.teacherSubjectClasseRuleSchoolyear.create.index', $response);
     }
@@ -47,20 +45,14 @@ class TeacherSubjectClasseRuleSchoolyearController extends Controller
     {
         $data = $this->validate($request, [
             'fk_teachers_id' => 'required',
-            'fk_subjects_id' =>  'required',
-            'fk_classes_id' => 'required',
-            'fk_rules_id' =>  'required',
-            'fk_schoolyears_id' =>  'required',
             'season' => 'required',
         ],
         [
             'fk_teachers_id.required' => 'O campo Professor deve ser selecionado',
-            'fk_subjects_id.required' => 'O campo Disciplina deve ser selecionado',
-            'fk_classes_id.required' => 'O campo Turma deve ser selecionado',
-            'fk_rules_id.required' => 'O campo Cargo deve ser selecionado',
-            'fk_schoolyears_id.required' => 'O campo Ano lectivo deve ser selecionado',
             'season.required' => 'O campo Turno deve ser selecionado',
         ]);
+
+        $data['fk_schoolyears_id'] = SchoolYearHelper::getCurrentSchoolYearId();
 
         TeacherSubjectClasseRuleSchoolyear::create($data);
         $this->Logger->log('info', 'Admitiu o Professor');
@@ -79,10 +71,8 @@ class TeacherSubjectClasseRuleSchoolyearController extends Controller
     public function edit($id)
     {
         $response['teachers'] = Teacher::OrderBy('id','Desc')->get();
-        $response['subjects'] = Subject::OrderBy('id','Desc')->get();
         $response['classes'] = Classe::OrderBy('id','Desc')->get();
         $response['rules'] = Rule::OrderBy('id','Desc')->get();
-        $response['schoolyears'] = Schoolyear::OrderBy('id','Desc')->get();
         $response['teacherSubjectClasseRuleSchoolyear'] = TeacherSubjectClasseRuleSchoolyear::find($id);
         $this->Logger->log('info', 'Editar Admissão do Professor');
         return view('admin.teacherSubjectClasseRuleSchoolyear.edit.index', $response);
@@ -93,17 +83,11 @@ class TeacherSubjectClasseRuleSchoolyearController extends Controller
     {
         $data = $request->validate([
             'fk_teachers_id' => 'required',
-            'fk_subjects_id' =>  'required',
-            'fk_classes_id' => 'required',
-            'fk_rules_id' =>  'required',
             'fk_schoolyears_id' =>  'required',
             'season' => 'required',
         ],
         [
             'fk_teachers_id.required' => 'O campo Professor deve ser selecionado',
-            'fk_subjects_id.required' => 'O campo Disciplina deve ser selecionado',
-            'fk_classes_id.required' => 'O campo Turma deve ser selecionado',
-            'fk_rules_id.required' => 'O campo Cargo deve ser selecionado',
             'fk_schoolyears_id.required' => 'O campo Ano lectivo deve ser selecionado',
             'season.required' => 'O campo Turno deve ser selecionado',
         ]);

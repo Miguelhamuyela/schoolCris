@@ -36,11 +36,8 @@ class GradeController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required',
-            'details' => 'required|max:500',
         ], [
                 'name.required' => 'O campo do nome é obrigatório',
-                'details.required' => 'O campo do detalhes é obrigatório',
-                'details.max' => 'O campo de detalhes não pode exceder os 500 caractéres',
             ]);
 
         Grade::create($data);
@@ -69,7 +66,6 @@ class GradeController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'details' => 'required|max:500',
         ]);
 
         Grade::find($id)->update($data);

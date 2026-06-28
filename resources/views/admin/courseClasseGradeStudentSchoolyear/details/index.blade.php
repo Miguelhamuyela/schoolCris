@@ -22,9 +22,10 @@
                                     </h2>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-4 text-right mt-5">
-
                                     <a href="{{ route('pdf.studentCard', $courseClasseGradeStudentSchoolyear->id) }}"
-                                        target="_blank" class="btn btn-md btn-warning shadow-sm text-end">Cartão</a>
+                                        target="_blank" class="btn btn-md btn-info shadow-sm text-end">Cartão</a>
+                                    <a href="{{ route('admin.student.photo', $courseClasseGradeStudentSchoolyear->students->id) }}"
+                                        class="btn btn-md btn-warning shadow-sm text-end">Atualizar Foto</a>
                                     <a href="{{ route('admin.courseClasseGradeStudentSchoolyear.edit', $courseClasseGradeStudentSchoolyear->id) }}"
                                         class="btn btn-md btn-primary shadow-sm text-end">Editar</a>
                                 </div>
@@ -101,9 +102,24 @@
 
                             <div class="row align-items-center">
                                 <div class="col-12 col-md-6 col-lg-4 mb-2">
-                                    <img src="/storage/images/{{ $courseClasseGradeStudentSchoolyear->image }}"
-                                        alt="Imagem - {{ $courseClasseGradeStudentSchoolyear->students->name }}">
-                                    <p class="text-dark"> </p>
+                                    <h5>
+                                        <b class="mb-1">Foto do Aluno</b>
+                                    </h5>
+                                    @php
+                                        $hasImage = !empty($courseClasseGradeStudentSchoolyear->students->image) && 
+                                                    file_exists(storage_path('app/public/images/' . $courseClasseGradeStudentSchoolyear->students->image));
+                                    @endphp
+                                    
+                                    @if($hasImage)
+                                        <img src="{{ route('admin.student.image', $courseClasseGradeStudentSchoolyear->students->image) }}"
+                                            alt="Foto de {{ $courseClasseGradeStudentSchoolyear->students->name }}"
+                                            class="img-fluid" style="width: 160px; height: 200px; object-fit: cover; border-radius: 5px; border: 2px solid #FF7F00;">
+                                    @else
+                                        <img src="{{ asset('dashboard/assets/img/undraw_profile.svg') }}"
+                                            alt="Foto não disponível"
+                                            class="img-fluid" style="max-width: 200px; border-radius: 5px; border: 2px solid #FF7F00;">
+                                        <p class="mt-2 text-muted">Foto não cadastrada</p>
+                                    @endif
                                 </div>
                             </div>
 

@@ -1,26 +1,21 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-    <div class="container d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
 
-        <h1 class="logo me-auto"><a href="/">SGE </a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="/" class="logo me-auto"><img src="/site/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- Usando logo como imagem com texto ao lado -->
+        <div class="d-flex align-items-center">
+            <a href="/" class="logo me-2"><img src="/site/assets/img/logo-sge.png" alt="SGE Logo" class="img-fluid"></a>
+            <h1 class="mb-0" style="font-size: 24px; font-weight: bold; color: #E65C00;">Instituto Politécnico Privado Pitágoras de Samos</h1>
+        </div>
 
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-
-                @if (Route::has('login'))
-                    @auth
-                        <li><a href="{{ url('/admin/home/') }}" class="nav-link scrollto">Painel</a></li>
-                    @else
-                        <li><a href="{{ route('login') }}" class="nav-link scrollto">Entrar no Sistema</a></li>
-
-                    @endauth
-                @endif
-
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+        <!-- Botão de Entrar Simples -->
+        @if (Route::has('login'))
+            @auth
+                <a href="{{ url('/admin/home/') }}" class="btn btn-primary">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">Entrar no Sistema</a>
+            @endauth
+        @endif
 
     </div>
 </header><!-- End Header -->

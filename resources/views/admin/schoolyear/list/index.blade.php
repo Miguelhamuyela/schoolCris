@@ -37,11 +37,6 @@
                                                 aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.schoolyear.show', $schoolyear->id) }}">Detalhes</a>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('admin.schoolyear.edit', $schoolyear->id) }}">Editar</a>
-                                                <a class="dropdown-item delete-button" href="#"
-                                                    data-based-id="{{ route('admin.schoolyear.destroy', $schoolyear->id) }}">Remover</a>
-
                                             </div>
                                         </div>
                                     </td>

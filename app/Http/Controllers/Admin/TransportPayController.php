@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Classes\Logger;
+use App\Helpers\SchoolYearHelper;
 use App\Http\Controllers\Controller;
 use App\Models\CourseClasseGradeStudentSchoolyear;
 use App\Models\Schoolyear;
@@ -31,11 +32,7 @@ class TransportPayController extends Controller
 
     public function create()
     {
-        $response['schoolyears'] = Schoolyear::OrderBy('id','Desc')->get();
         $response['transports'] = Transport::OrderBy('id', 'Desc')->get();
-        $response['students'] = Student::orderBy('id', 'desc')
-            ->get();
-
         $response['registrations'] = CourseClasseGradeStudentSchoolyear::orderBy('id', 'desc')
             ->get();
 
@@ -50,18 +47,18 @@ class TransportPayController extends Controller
             'price' => 'required|integer',
             'state' => 'required',
             'fk_students_id' => 'required',
-            'fk_transports_id' => 'required',
-            'fk_schoolyears_id' => 'required'
+            'fk_transports_id' => 'required'
         ], [
-                'name.required' => 'O campo do mês é obrigatório',
+                'month.required' => 'O campo do mês é obrigatório',
                 'price.required' => 'O campo do preço é obrigatório',
                 'state.required' => 'O campo do Estado é obrigatório',
                 'fk_students_id.required' => 'O campo do Aluno é obrigatório',
                 'fk_transports_id.required' => 'O campo do Transporte é obrigatório',
-                'fk_schoolyears_id.required' => 'O campo do Ano Lectivo é obrigatório',
                 'price.integer' => 'O campo de preço não pode conter caractéres não numericos',
 
             ]);
+
+        $data['fk_schoolyears_id'] = SchoolYearHelper::getCurrentSchoolYearId();
 
         TransportPay::create($data);
 
@@ -100,7 +97,7 @@ class TransportPayController extends Controller
             'fk_transports_id' => 'required',
             'fk_students_id' => 'required'
         ], [
-                'name.required' => 'O campo do mês é obrigatório',
+                'month.required' => 'O campo do mês é obrigatório',
                 'price.required' => 'O campo do preço é obrigatório',
                 'state.required' => 'O campo do Estado é obrigatório',
                 'fk_students_id.required' => 'O campo do Aluno é obrigatório',
@@ -118,12 +115,6 @@ class TransportPayController extends Controller
 
     public function destroy($id)
     {
-        $TransportPay = TransportPay::find($id);
-
-        // Verifica se a Pagamento de Transporte está associada a outro registro
-        if ($TransportPay->students->count() > 0) {
-            return redirect()->back()->with('transports_destroy_error', '1');
-        }
         TransportPay::find($id)->delete();
         $this->Logger->log('info', 'Eliminou a Pagamento de Transporte');
 

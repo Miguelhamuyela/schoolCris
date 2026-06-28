@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TeacherRule extends Model
 {
     use HasFactory;
-    public $table = "teachers_rules";
+    public $table = "docentes_regras";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];

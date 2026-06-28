@@ -13,14 +13,14 @@ class CreateTeacherSchoolyearsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teachers_schoolyears', function (Blueprint $table) {
+        Schema::create('docentes_anos_lectivos', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('fk_teachers_id');
-            $table->foreign('fk_teachers_id')->references('id')->on('teachers')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_teachers_id')->references('id')->on('docentes')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_schoolyears_id');
-            $table->foreign('fk_schoolyears_id')->references('id')->on('schoolyears')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_schoolyears_id')->references('id')->on('anos_lectivos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +34,6 @@ class CreateTeacherSchoolyearsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers_schoolyears');
+        Schema::dropIfExists('docentes_anos_lectivos');
     }
 }

@@ -1,0 +1,142 @@
+/* Estilos personalizados para os menus dropdown do sidebar */
+
+/* Melhorando a animação de transição */
+.sidebar .nav-item .collapse, 
+.sidebar .nav-item .collapsing {
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* Estilo do container do dropdown */
+.sidebar .nav-item .collapse .collapse-inner, 
+.sidebar .nav-item .collapsing .collapse-inner {
+    border-radius: 0.5rem !important;
+    padding: 0.7rem 0 !important;
+    margin: 0 0 0.8rem 0 !important;
+    border-left: 4px solid #4e73df !important;
+    background: linear-gradient(to right, #f8f9fc, #ffffff) !important;
+    box-shadow: 0 0.25rem 0.75rem rgba(58, 59, 69, 0.12) !important;
+    transform: translateY(5px) !important;
+    animation: fadeInDown 0.2s ease-in-out !important;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(5px);
+    }
+}
+
+/* Estilo dos itens do dropdown */
+.sidebar .nav-item .collapse .collapse-inner .collapse-item, 
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item {
+    padding: 0.6rem 1.2rem !important;
+    margin: 0.2rem 0.7rem !important;
+    border-radius: 0.35rem !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    color: #5a5c69 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.01rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Efeito de destaque ao passar o mouse */
+.sidebar .nav-item .collapse .collapse-inner .collapse-item::before,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(78, 115, 223, 0.1) !important;
+    transition: all 0.3s ease !important;
+    z-index: -1 !important;
+}
+
+/* Hover sobre os itens do dropdown */
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover, 
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
+    background-color: #eaecf4 !important;
+    transform: translateX(3px) !important;
+    color: #2e59d9 !important;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover::before,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover::before {
+    left: 0 !important;
+}
+
+/* Item ativo do dropdown */
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active, 
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+    color: #4e73df !important;
+    font-weight: 600 !important;
+    background-color: rgba(78, 115, 223, 0.1) !important;
+    border-right: 3px solid #4e73df !important;
+}
+
+/* Ícones dentro dos itens do dropdown */
+.sidebar .nav-item .collapse .collapse-inner .collapse-item i,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item i {
+    color: #4e73df !important;
+    margin-right: 0.5rem !important;
+    transition: all 0.2s !important;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover i,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover i {
+    transform: scale(1.2) !important;
+}
+
+/* Ícone de seta mais elegante para indicar dropdown */
+.sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
+    content: '\f107' !important;
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900 !important;
+    float: right !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: absolute !important;
+    right: -18px !important;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Rotação da seta quando o dropdown está fechado */
+.sidebar .nav-item .nav-link[data-toggle="collapse"].collapsed::after {
+    content: '\f105' !important;
+    transform: rotate(0deg) !important;
+}
+
+/* Rotação da seta quando o dropdown está aberto */
+.sidebar .nav-item .nav-link[data-toggle="collapse"]:not(.collapsed)::after {
+    transform: rotate(-90deg) !important;
+}
+
+/* Destaque para os itens do menu quando expandidos */
+.sidebar .nav-item .nav-link[data-toggle="collapse"]:not(.collapsed) {
+    background-color: rgba(78, 115, 223, 0.2) !important;
+    border-left: 4px solid #4e73df !important;
+}
+
+.sidebar .nav-item .nav-link[data-toggle="collapse"] {
+    position: relative !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+}
+
+.sidebar {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+} 

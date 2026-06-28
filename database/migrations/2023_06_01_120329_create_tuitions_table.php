@@ -13,17 +13,18 @@ class CreateTuitionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tuitions', function (Blueprint $table) {
+        Schema::create('propinas', function (Blueprint $table) {
             $table->id();
             $table->string('month');
             $table->bigInteger('price');
             $table->string('state');
+            $table->decimal('fine', 10, 2)->default(0.00);
 
             $table->unsignedBigInteger('fk_students_id');
-            $table->foreign('fk_students_id')->references('id')->on('students')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_students_id')->references('id')->on('alunos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_schoolyears_id');
-            $table->foreign('fk_schoolyears_id')->references('id')->on('schoolyears')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_schoolyears_id')->references('id')->on('anos_lectivos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->softDeletes();
             $table->timestamps();
@@ -37,6 +38,6 @@ class CreateTuitionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tuitions');
+        Schema::dropIfExists('propinas');
     }
 }

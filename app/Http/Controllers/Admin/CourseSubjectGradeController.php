@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseSubjectGrade;
 use App\Models\Grade;
-use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Classes\Logger;
 use App\Models\Log;
@@ -30,7 +29,6 @@ class CourseSubjectGradeController extends Controller
     public function create()
     {
         $response['courses'] = Course::OrderBy('id', 'Desc')->get();
-        $response['subjects'] = Subject::OrderBy('id', 'Desc')->get();
         $response['grades'] = Grade::OrderBy('id', 'Desc')->get();
         $this->Logger->log('info', 'Criar Associação do Curso');
         return view('admin.courseSubjectGrade.create.index', $response);
@@ -43,12 +41,10 @@ class CourseSubjectGradeController extends Controller
             $request,
             [
                 'fk_courses_id' => 'required',
-                'fk_subjects_id' => 'required',
                 'fk_grades_id' => 'required',
             ],
             [
                 'fk_courses_id.required' => 'O campo Curso deve ser selecionado',
-                'fk_subjects_id.required' => 'O campo Disciplina deve ser selecionado',
                 'fk_grades_id.required' => 'O campo Classe deve ser selecionado',
             ]
         );
@@ -70,7 +66,6 @@ class CourseSubjectGradeController extends Controller
     public function edit($id)
     {
         $response['courses'] = Course::OrderBy('id', 'Desc')->get();
-        $response['subjects'] = Subject::OrderBy('id', 'Desc')->get();
         $response['grades'] = Grade::OrderBy('id', 'Desc')->get();
         $response['courseSubjectGrade'] = CourseSubjectGrade::find($id);
         $this->Logger->log('info', 'Editar Associação do Curso');
@@ -83,12 +78,10 @@ class CourseSubjectGradeController extends Controller
         $data = $request->validate(
             [
                 'fk_courses_id' => 'required',
-                'fk_subjects_id' => 'required',
                 'fk_grades_id' => 'required',
             ],
             [
                 'fk_courses_id.required' => 'O campo Curso deve ser selecionado',
-                'fk_subjects_id.required' => 'O campo Disciplina deve ser selecionado',
                 'fk_grades_id.required' => 'O campo Classe deve ser selecionado',
             ]
         );

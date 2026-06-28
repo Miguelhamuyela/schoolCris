@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Transport extends Model
 {
     use HasFactory;
-    public $table = "transports";
+    public $table = "transportes";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];

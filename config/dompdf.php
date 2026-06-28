@@ -93,7 +93,8 @@ return array(
         'allowed_protocols' => [
             "file://" => ["rules" => []],
             "http://" => ["rules" => []],
-            "https://" => ["rules" => []]
+            "https://" => ["rules" => []],
+            "data://" => ["rules" => []]
         ],
 
          /**

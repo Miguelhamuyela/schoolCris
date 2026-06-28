@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>SISTEMA (LARAVEL)</h1>
+  <div class="mermaid">
+    erDiagram
+      sessions {
+            string id PK
+            bigint user_id FK "nullable"
+            string ip_address "nullable"
+            text user_agent "nullable"
+            longtext payload
+            integer last_activity
+          }
+      
+          password_resets {
+            string email
+            string token
+            timestamp created_at
+          }
+      
+          failed_jobs {
+            bigint id PK
+            string uuid UK
+            text connection
+            text queue
+            longtext payload
+            longtext exception
+            timestamp failed_at
+          }
+      
+          personal_access_tokens {
+            bigint id PK
+            string tokenable_type
+            bigint tokenable_id
+            string name
+            string token UK
+            text abilities "nullable"
+            timestamp last_used_at "nullable"
+            timestamp expires_at "nullable"
+          }
+      
+          registos {
+            bigint id PK
+            enum level
+            string REMOTE_ADDR "nullable"
+            string PATH_INFO "nullable"
+            string USER_NAME "nullable"
+            string USER_ID "nullable"
+            string HTTP_USER_AGENT "nullable"
+            longtext message "nullable"
+          }
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

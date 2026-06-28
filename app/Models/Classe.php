@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Classe extends Model
 {
     use HasFactory;
-    public $table = "classes";
+    public $table = "turmas";
     protected $guarded = ['id'];
     use softDeletes;
     protected $dates = ['deleted_at'];
@@ -17,32 +17,27 @@ class Classe extends Model
     /** Relacão da Matricula */
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'registrations', 'fk_classes_id', 'fk_courses_id');
+        return $this->belongsToMany(Course::class, 'matriculas', 'fk_classes_id', 'fk_courses_id');
     }
     public function grades()
     {
-        return $this->belongsToMany(Grade::class, 'registrations', 'fk_classes_id', 'fk_grades_id');
+        return $this->belongsToMany(Grade::class, 'matriculas', 'fk_classes_id', 'fk_grades_id');
     }
 
     /** Relacão do Contracto do Professor */
-    public function subjects()
-    {
-        return $this->belongsToMany(Subject::class, 'contracts', 'fk_classes_id', 'fk_subjects_id');
-    }
-
     public function rules()
     {
-        return $this->belongsToMany(Rule::class, 'contracts', 'fk_classes_id', 'fk_rules_id');
+        return $this->belongsToMany(Rule::class, 'contratos', 'fk_classes_id', 'fk_rules_id');
     }
 
     /** Relacão do Exame */
     
     public function teacher()
     {
-        return $this->belongsToMany(Teacher::class, 'exams', 'fk_classes_id', 'fk_teachers_id');
+        return $this->belongsToMany(Teacher::class, 'exames', 'fk_classes_id', 'fk_teachers_id');
     }
     public function course()
     {
-        return $this->belongsToMany(Course::class, 'exams', 'fk_classes_id', 'fk_courses_id');
+        return $this->belongsToMany(Course::class, 'exames', 'fk_classes_id', 'fk_courses_id');
     }
 }

@@ -13,14 +13,14 @@ class CreateUsersRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_roles', function (Blueprint $table) {
+        Schema::create('usuarios_papeis', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('fk_users_id');
-            $table->foreign('fk_users_id')->references('id')->on('users')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_users_id')->references('id')->on('usuarios')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_roles_id');
-            $table->foreign('fk_roles_id')->references('id')->on('roles')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_roles_id')->references('id')->on('papeis')->onDelete('CASCADE')->onUpgrade('CASCADE');
             
             $table->softDeletes();
             $table->timestamps();
@@ -34,6 +34,6 @@ class CreateUsersRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_roles');
+        Schema::dropIfExists('usuarios_papeis');
     }
 }

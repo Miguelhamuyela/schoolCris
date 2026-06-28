@@ -13,14 +13,14 @@ class CreateTeachersRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('teachers_rules', function (Blueprint $table) {
+        Schema::create('docentes_regras', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('fk_teachers_id');
-            $table->foreign('fk_teachers_id')->references('id')->on('teachers')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_teachers_id')->references('id')->on('docentes')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_rules_id');
-            $table->foreign('fk_rules_id')->references('id')->on('rules')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_rules_id')->references('id')->on('regras')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +34,6 @@ class CreateTeachersRulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers_rules');
+        Schema::dropIfExists('docentes_regras');
     }
 }

@@ -13,7 +13,7 @@ class CreateRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rules', function (Blueprint $table) {
+        Schema::create('regras', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('details',500);
@@ -29,6 +29,6 @@ class CreateRulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rules');
+        Schema::dropIfExists('regras');
     }
 }

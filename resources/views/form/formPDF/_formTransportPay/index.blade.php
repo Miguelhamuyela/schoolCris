@@ -11,7 +11,7 @@
             <select class="form-control" name="schoolyear" id="schoolyear" required>
                 <option value=""></option>
                 @foreach ($schoolyears as $schoolyear)
-                    <option value="{{ $schoolyear->name }}">{{ $schoolyear->name }}</option>
+                    <option value="{{ $schoolyear->name }}" {{ $schoolyear->is_current ? 'selected' : '' }}>{{ $schoolyear->name }}</option>
                 @endforeach
             </select>
         </div>

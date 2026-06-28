@@ -17,7 +17,12 @@
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
 
-
+                <!-- Dark Mode Toggle Button -->
+                <li class="nav-item">
+                    <button id="darkModeToggle" class="btn btn-link nav-link">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -39,16 +44,16 @@
                                     @if ($item->name == 'admin')
                                         Administrador
                                         @break
-                                    @elseif($item->name == 'gerenciador')
-                                        Gestor
-                                        @break
-                                    @elseif($item->name == 'registrador')
-                                        Registrador
+                                    @elseif($item->name == 'Secretaria')
+                                        Secretaria
                                         @break
                                     @endif
                                 @endforeach
                             </span>
-                            <img class="img-profile rounded-circle" src="/dashboard/assets/img/undraw_profile.svg">
+                            <img class="img-profile rounded-circle"
+                                src="{{ Auth::user()->profile_image_url }}"
+                                alt="Foto do utilizador"
+                                style="width: 40px; height: 40px; object-fit: cover;">
                         </a>
 
 

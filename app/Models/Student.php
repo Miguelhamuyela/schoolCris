@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Student extends Model
 {
     use HasFactory;
-    public $table = "students";
+    public $table = "alunos";
     protected $guarded = ['id'];
     use softDeletes;
     protected $dates = ['deleted_at'];
 
     public function schoolyears()
     {
-        return $this->belongsToMany(Schoolyear::class, 'registrations', 'fk_students_id', 'fk_schoolyears_id')->withTimestamps();
+        return $this->belongsToMany(Schoolyear::class, 'matriculas', 'fk_students_id', 'fk_schoolyears_id')->withTimestamps();
     }
 
     public function grades()
     {
-        return $this->belongsToMany(Grade::class, 'registrations');
+        return $this->belongsToMany(Grade::class, 'matriculas');
     }
     
 }

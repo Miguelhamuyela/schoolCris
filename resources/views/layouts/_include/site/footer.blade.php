@@ -5,6 +5,9 @@
     <div class="copyright">
       <strong>Sistema de Gestão Escolar</strong>
     </div>
+    <div class="text-center mt-2">
+      <small>Instituto Politécnico Privado Pitágoras de Samos &copy; {{ date('Y') }}</small>
+    </div>
   </div>
 </footer><!-- End  Footer -->
 

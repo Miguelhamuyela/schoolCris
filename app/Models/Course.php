@@ -12,30 +12,23 @@ class Course extends Model
     protected $guarded = ['id'];
     use softDeletes;
     protected $dates = ['deleted_at'];
-    public $table = "courses";
+    public $table = "cursos";
 
     /** relação da Maticula */
     public function classes()
     {
-        return $this->belongsToMany(Classe::class, 'registrations');
+        return $this->belongsToMany(Classe::class, 'matriculas');
     }
 
     /** relação do Exame */
 
     public function classe()
     {
-        return $this->belongsToMany(Classe::class, 'exams');
+        return $this->belongsToMany(Classe::class, 'exames');
     }
     public function grade()
     {
-        return $this->belongsToMany(Grade::class, 'exams');
-    }
-
-/** Curso e Disciplina e Classe */
-
-    public function subjects()
-    {
-        return $this->belongsToMany(Subject::class, 'courses_subjects_grades');
+        return $this->belongsToMany(Grade::class, 'exames');
     }
 
     

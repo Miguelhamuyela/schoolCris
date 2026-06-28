@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>PIVOTS — DOCENTES</h1>
+  <div class="mermaid">
+    erDiagram
+      docentes_anos_lectivos {
+            bigint id PK
+            bigint fk_teachers_id FK
+            bigint fk_schoolyears_id FK
+          }
+      
+          docentes_regras {
+            bigint id PK
+            bigint fk_teachers_id FK
+            bigint fk_rules_id FK
+          }
+      
+          docentes_cursos {
+            bigint id PK
+            bigint fk_teachers_id FK
+            bigint fk_courses_id FK
+          }
+      
+          docentes_turmas {
+            bigint id PK
+            bigint fk_teachers_id FK
+            bigint fk_classes_id FK
+          }
+      
+          docentes_niveis {
+            bigint id PK
+            bigint fk_teachers_id FK
+            bigint fk_grades_id FK
+          }
+      
+          docentes ||--o{ docentes_anos_lectivos : ""
+          anos_lectivos ||--o{ docentes_anos_lectivos : ""
+      
+          docentes ||--o{ docentes_regras : ""
+          regras ||--o{ docentes_regras : ""
+      
+          docentes ||--o{ docentes_cursos : ""
+          cursos ||--o{ docentes_cursos : ""
+      
+          docentes ||--o{ docentes_turmas : ""
+          turmas ||--o{ docentes_turmas : ""
+      
+          docentes ||--o{ docentes_niveis : ""
+          niveis ||--o{ docentes_niveis : ""
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

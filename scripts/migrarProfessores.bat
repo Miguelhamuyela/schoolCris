@@ -1,0 +1,6 @@
+@echo off
+echo Migrando professores para tabela teachers...
+php artisan professors:migrate
+echo.
+echo Pressione qualquer tecla para sair...
+pause > nul 

@@ -42,9 +42,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Professor</th>
-                                <th>Cargo</th>
-                                <th>Turma</th>
-                                <th>Disciplina</th>
                                 <th>Ano Lectivo</th>
                                 <th>Turno</th>
                                 <th>Acções</th>
@@ -55,9 +52,6 @@
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $teacherSubjectClasseRuleSchoolyear->teachers->name }}</td>
-                                    <td>{{ $teacherSubjectClasseRuleSchoolyear->rules->name }}</td>
-                                    <td>{{ $teacherSubjectClasseRuleSchoolyear->classes->name }}</td>
-                                    <td>{{ $teacherSubjectClasseRuleSchoolyear->subjects->name }}</td>
                                     <td>{{ $teacherSubjectClasseRuleSchoolyear->schoolyears->name }}</td>
                                     <td>{{ $teacherSubjectClasseRuleSchoolyear->season }}</td>
                                     <td>
@@ -74,13 +68,11 @@
                                                     href="{{ route('admin.teacherSubjectClasseRuleSchoolyear.edit', $teacherSubjectClasseRuleSchoolyear->id) }}">Editar</a>
                                                 <a class="dropdown-item delete-button" href="#"
                                                     data-based-id="{{ route('admin.teacherSubjectClasseRuleSchoolyear.destroy', $teacherSubjectClasseRuleSchoolyear->id) }}">Remover</a>
-
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

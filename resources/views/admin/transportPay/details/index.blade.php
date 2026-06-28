@@ -1,5 +1,5 @@
 @extends('layouts.merge.dashboard')
-@section('title', 'Detalhes da Disciplina')
+@section('title', 'Detalhes do Pagamento de Transporte')
 @section('content')
     <div class="container-fluid">
         <div class="card shadow mb-4">

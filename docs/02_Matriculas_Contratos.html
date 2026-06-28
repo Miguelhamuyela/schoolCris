@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>MATRÍCULAS & CONTRATOS</h1>
+  <div class="mermaid">
+    erDiagram
+      matriculas {
+            bigint id PK
+            string season
+            bigint fk_courses_id FK
+            bigint fk_classes_id FK
+            bigint fk_grades_id FK
+            bigint fk_students_id FK
+            bigint fk_schoolyears_id FK
+            string details
+            string status
+            boolean is_confirmation
+          }
+      
+          contratos {
+            bigint id PK
+            string season
+            bigint fk_teachers_id FK
+            bigint fk_classes_id FK "nullable"
+            bigint fk_rules_id FK "nullable"
+            bigint fk_schoolyears_id FK
+          }
+      
+          alunos ||--o{ matriculas : ""
+          cursos ||--o{ matriculas : ""
+          turmas ||--o{ matriculas : ""
+          niveis ||--o{ matriculas : ""
+          anos_lectivos ||--o{ matriculas : ""
+      
+          docentes ||--o{ contratos : ""
+          turmas ||--o{ contratos : ""
+          regras ||--o{ contratos : ""
+          anos_lectivos ||--o{ contratos : ""
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

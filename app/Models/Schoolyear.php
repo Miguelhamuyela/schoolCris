@@ -9,18 +9,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Schoolyear extends Model
 {
     use HasFactory;
-    public $table = "schoolyears";
+    public $table = "anos_lectivos";
     protected $guarded = ['id'];
     use softDeletes;
     protected $dates = ['deleted_at'];
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'registrations');
+        return $this->belongsToMany(Student::class, 'matriculas');
     }
 
     public function rules()
     {
-        return $this->belongsToMany(Rules::class, 'contracts');
+        return $this->belongsToMany(Rule::class, 'contratos');
+    }
+
+    public function scopeCurrent($query)
+    {
+        return $query->where('is_current', true);
     }
 }

@@ -1,65 +1,217 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 📚 README — Sistema de Gestão Escolar (SGE)
+> Instituto Politécnico Privado Pitágoras de Samos
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 🧰 Tecnologias e Ferramentas Utilizadas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Backend
+| Tecnologia | Versão | Finalidade |
+|---|---|---|
+| **PHP** | 8.x | Linguagem principal do servidor |
+| **Laravel** | 9/10 | Framework MVC do backend |
+| **MySQL** | 8.x | Base de dados relacional |
+| **Eloquent ORM** | (incluso no Laravel) | Comunicação com a base de dados |
+| **Blade** | (incluso no Laravel) | Motor de templates para as views |
+| **Middleware** | (incluso no Laravel) | Controlo de acesso por papel (role) |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Frontend
+| Tecnologia | Finalidade |
+|---|---|
+| **HTML5 / CSS3** | Estrutura e estilo das páginas |
+| **Bootstrap 4** | Framework CSS responsivo |
+| **SB Admin 2** | Template do painel administrativo |
+| **jQuery 3.6** | Interatividade e chamadas AJAX |
+| **DataTables** | Tabelas com pesquisa, paginação e exportação |
+| **SweetAlert2** | Notificações e diálogos de confirmação elegantes |
+| **Font Awesome** | Ícones do painel |
+| **Google Fonts (Inter/Nunito)** | Tipografia moderna |
+| **FullCalendar** | Calendário (na homepage do painel) |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Pacotes Laravel (Composer)
+| Pacote | Finalidade |
+|---|---|
+| `laravel/ui` | Scaffolding de autenticação (Login/Logout) |
+| `barryvdh/laravel-dompdf` | Geração de PDFs (faturas, relatórios) |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🗂️ Estrutura do Projeto
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+schoolCris/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/Admin/   → Todos os controladores do painel
+│   │   └── Middleware/
+│   │       ├── AdminMiddleware.php        → Acesso: Admin e Secretaria
+│   │       └── RegistradorMiddleware.php  → Regras de acesso da Secretaria
+│   └── Models/                  → Modelos Eloquent (User, Role, Student, etc.)
+│
+├── database/
+│   ├── migrations/              → Tabelas da base de dados
+│   └── seeders/
+│       ├── AdminSeeder.php      → Cria o utilizador admin padrão
+│       └── RoleSeeder.php       → Cria todos os papéis (roles) do sistema
+│
+├── resources/views/
+│   ├── admin/                   → Todas as views do painel
+│   ├── layouts/
+│   │   ├── merge/dashboard.blade.php      → Layout base do painel
+│   │   └── _include/dashboard/
+│   │       ├── aside-admin.blade.php      → Barra lateral (Admin + Secretaria)
+│   │       ├── header.blade.php           → Cabeçalho HTML
+│   │       ├── nav.blade.php              → Topbar e navbar
+│   │       └── footer.blade.php           → Rodapé + todos os scripts JS
+│   └── form/                    → Formulários reutilizáveis (ex: _formUser/)
+│
+├── routes/
+│   └── Admin.php                → Todas as rotas do painel
+│
+└── public/dashboard/assets/
+    ├── css/
+    │   ├── custom-theme.css     ← 🎨 FICHEIRO PRINCIPAL PARA ALTERAR CORES
+    │   ├── sb-admin-2.css       → CSS base do template
+    │   ├── dark-mode.css        → Estilos do modo escuro
+    │   └── custom-forms.css     → Estilos dos formulários
+    └── scss/
+        └── _variables.scss      ← SCSS: variáveis de cor (requer compilação)
+```
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🔑 Credenciais Padrão
 
-### Premium Partners
+| Papel | E-mail | Senha |
+|---|---|---|
+| Administrador | `admin@admin.com` | `123456` |
+| Secretaria | `secretaria@escola.com` | `123456` |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+---
 
-## Contributing
+#### 🔐 Sistema de Numeração de Alunos (nProcess)
+O sistema utiliza agora um formato alfanumérico automático (**Ex: A1, B2, C10**):
+- O número é gerado no momento da matrícula com base no **Curso + Classe**.
+- Cada grupo (Curso/Classe) recebe uma letra única (A, B, C...).
+- O número é sequencial dentro de cada letra.
+- **Pesquisa**: No pagamento de propinas, basta digitar o número (ex: A1) para carregar os dados do aluno.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### ✉️ Mensagens Internas (SMS do Sistema)
+Permite a comunicação direta entre Admin e Secretaria:
+- **Acesso**: Menu "Mensagens" na barra lateral.
+- **Notificação**: Alertas em tempo real para mensagens novas (não lidas).
+- **Histórico**: Pastas de Caixa de Entrada e Enviadas.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🎨 Personalização de Cores
+A cor principal do painel pode ser alterada em `public/dashboard/assets/css/custom-theme.css`:
 
-## Security Vulnerabilities
+Localiza as primeiras linhas do ficheiro:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```css
+:root {
+    --blue: #FF8000;          /* Cor de destaque secundária */
+    --primary: #FF8000;       /* ← COR PRINCIPAL (botões, sidebar, links) */
+    --primary-darker: #E67300; /* ← COR MAIS ESCURA (hover dos botões) */
+}
+```
 
-## License
+**Exemplo: mudar para azul**
+```css
+:root {
+    --primary: #4e73df;
+    --primary-darker: #2e59d9;
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# schoolmanagement" 
+**Exemplo: mudar para verde**
+```css
+:root {
+    --primary: #1cc88a;
+    --primary-darker: #17a673;
+}
+```
+
+> ✅ Ao alterar estas duas variáveis, **toda a interface** muda de cor: sidebar, botões, links, bordas, tabelas, hover, etc. — automaticamente.
+
+---
+
+### Cores por componente (referência rápida)
+
+| Elemento | Propriedade CSS |
+|---|---|
+| Botões primários | `.btn-primary` → usa `--primary` |
+| Barra lateral | `.bg-gradient-primary` → usa `--primary` |
+| Links | `a` → usa `--primary` |
+| Borda esquerda dos cards | `.border-left-primary` |
+| Realce em tabelas | `.table-primary` |
+| Inputs em foco | `.form-control:focus` |
+| Notificações SweetAlert | (mantém azul por padrão — pode ser alterado) |
+
+> **Nota:** O ficheiro `_variables.scss` contém as variáveis SCSS originais do template Bootstrap. Para as alterar precisas de recompilar o SCSS (requer Node.js + gulp). Para a maioria dos casos, alterar apenas o `custom-theme.css` é suficiente.
+
+---
+
+## 📦 Como Instalar o Projeto
+
+```bash
+# 1. Clonar ou copiar o projeto para a pasta desejada
+
+# 2. Instalar dependências PHP
+composer install
+
+# 3. Copiar ficheiro de ambiente
+cp .env.example .env
+
+# 4. Gerar chave da aplicação
+php artisan key:generate
+
+# 5. Configurar a base de dados no .env
+DB_DATABASE=nome_da_base
+DB_USERNAME=root
+DB_PASSWORD=
+
+# 6. Executar migrações e seeders
+php artisan migrate --seed
+
+# 7. Criar link simbólico para storage (fotos)
+php artisan storage:link
+
+# 8. Iniciar o servidor local
+php artisan serve
+```
+
+---
+
+## 👥 Papéis (Roles) do Sistema
+
+| Papel | Acesso |
+|---|---|
+| `admin` | Acesso total ao sistema |
+| `Secretaria` | Acesso total exceto gerir utilizadores e professores |
+| `Limpeza` | Apenas para identificação/listagem |
+| `Seguranças` | Apenas para identificação/listagem |
+| `Coordenadores` | Apenas para identificação/listagem |
+| `Director Geral` | Apenas para identificação/listagem |
+| `Supervisor da Biblioteca` | Apenas para identificação/listagem |
+| `Chefe de patrimônio` | Apenas para identificação/listagem |
+| `Electricista` | Apenas para identificação/listagem |
+| `Técnico de Frio` | Apenas para identificação/listagem |
+| `Técnico de CCTV` | Apenas para identificação/listagem |
+| `Técnico IT` | Apenas para identificação/listagem |
+
+> Os cargos administrativos são atribuídos pelo Admin ao criar um utilizador. Servem atualmente para identificação e registo no sistema.
+
+---
+
+## 🖨️ Geração de PDFs
+
+O sistema usa o pacote **DomPDF** para gerar documentos em PDF:
+- Faturas de propinas
+- Faturas de transporte
+- Listas de alunos matriculados
+- Cartão do aluno
+- Chefes de departamento
+
+Os ficheiros de template PDF estão em `resources/views/pdf/`.

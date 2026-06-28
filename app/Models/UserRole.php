@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserRole extends Model
 {
     use HasFactory;
-    public $table = "users_roles";
+    public $table = "usuarios_papeis";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];

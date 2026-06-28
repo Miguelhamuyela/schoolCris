@@ -1,95 +1,142 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lista de Maticulados-{{ date('d/m/Y', strtotime(now())) }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pagamentos - {{ date('d/m/Y') }}</title>
     <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.3;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
-
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        header {
+        .header {
             text-align: center;
-            padding: 1.5rem;
+            padding: 10px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        .logo {
+            max-width: 80px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        h1 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        h2 {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .title {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: left;
+            font-size: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .footer {
+            font-size: 9px;
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
         }
     </style>
 </head>
 
 <body>
-    <header class="header">
-        <div class="img">
-            <img src="dashboard/assets/img/insignia.png" alt="">
-        </div>
-        <div class="text-center">REPÚBLICA DE ANGOLA</div>
-        <div class="text-center">MINISTÉRIO DA EDUCAÇÃO</div>
-        <div class="text-center">LISTA DE PAGAMENTOS DE PROPINAs</div>
-        <div class="text-center">MÊS DE "<b>{{ $month }}</b>"</div>
-        <div class="text-center">ANO LECTIVO "<b>{{ $schoolyear }}</b>", </div>
-    </header>
+    @php
+        $logoPath = public_path('dashboard/assets/img/logo-sge-small.png');
+        $logoSrc = '';
+        if (file_exists($logoPath)) {
+            $type = pathinfo($logoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($logoPath);
+            $logoSrc = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+    @endphp
+    <div class="header">
+        @if ($logoSrc)
+            <img src="{{ $logoSrc }}" alt="Logo Instituto" class="logo">
+        @endif
+        <h1>Instituto Politécnico Privado Pitágoras de Samos</h1>
+        <h2>LISTA DE PAGAMENTOS DE PROPINAS</h2>
+        <div class="title">@if(!empty($schoolyear))Mês: <b>{{ $month }}</b> - Ano Lectivo: <b>{{ $schoolyear }}</b>@else Relatório Completo @endif</div>
+    </div>
 
-    <main>
-        <div class="main">
-            <table class="table">
-                <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Nº Processo</th>
+                <th>Curso</th>
+                <th>Classe</th>
+                <th>Valor</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $counter = 0; @endphp
+            @foreach ($tuitions as $item)
+                @if (($pay == null && $item->state == "Pago") || 
+                     ($cancel == null && $item->state == "Cancelado") || 
+                     ($pending == null && $item->state == "Pendente"))
+                    @continue
+                @endif
+                @php $counter++; @endphp
+                @php
+                    // Buscar a matrícula do aluno para o ano letivo selecionado
+                    $registration = App\Models\CourseClasseGradeStudentSchoolyear::where('fk_students_id', $item->fk_students_id)
+                        ->where('fk_schoolyears_id', $item->fk_schoolyears_id)
+                        ->with('courses', 'grades')
+                        ->first();
+                @endphp
+                <tr>
+                    <td>{{ $counter }}</td>
+                    <td>{{ $item->students ? $item->students->name : 'N/A' }}</td>
+                    <td>{{ $item->students ? $item->students->nProcess : 'N/A' }}</td>
+                    <td>{{ $registration && $registration->courses ? $registration->courses->name : 'N/A' }}</td>
+                    <td>{{ $registration && $registration->grades ? $registration->grades->name : 'N/A' }}</td>
+                    <td>{!! number_format($item->price, 2, ',', '.') . ' AOA' !!}</td>
+                    <td>{{ $item->state }}</td>
+                </tr>
+                @if($counter >= 1000)
                     <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Nº de Processo</th>
-                        <th>Ano lectivo</th>
-                        <th>Valor pago</th>
-                        <th>Estado do Pagamento</th>
+                        <td colspan="7" style="text-align: center; font-style: italic;">
+                            Relatório limitado a 1000 registros. Por favor, refine seus filtros para ver mais resultados.
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($tuitions as $item)
-                        @if ($pay == null && $item->state == "Pago")
-                            @continue
-                        @elseif ($cancel == null && $item->state == "Cancelado")
-                            @continue
-                        @elseif ($pending == null && $item->state == "Pendente")
-                            @continue
-                        @else
-                            <tr>
-                                <td scope="row">{{ $loop->index + 1 }}</td>
-                                <td>{{ $item->students->name }}</td>
-                                <td>{{ $item->students->nProcess }}</td>
-                                <td>{{ $item->schoolyears->name }} </td>
-                                <td>{!! number_format($item->price, 2, ',', '.') . ' ' . 'kz' !!}</td>
-                                <td>{{ $item->state }}</td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </main>
-    <hr class="pylarge bg-dark">
-    <footer class="col-12 mt-2 text-center" id="footer">
+                    @break
+                @endif
+            @endforeach
+        </tbody>
+    </table>
 
-        <small class="text-left text-dark">
-            Documento Processado por Computador. <br>
-        </small>
-
-    </footer>
-
-
+    <div class="footer">
+        <p>Instituto Politécnico Privado Pitágoras de Samos &copy; {{ date('Y') }}</p>
+        <p>Documento processado por computador em {{ date('d/m/Y') }} às {{ date('H:i') }}</p>
+    </div>
 </body>
 
 </html>

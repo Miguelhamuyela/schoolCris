@@ -14,14 +14,14 @@
         @include('extra._Error.index')
 
         <div class="card-body">
-
-            <form action="{{ route('admin.user.update', $user->id) }}" method="POST">
+            <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('form._formUser.index')
-
             </form>
         </div>
     </div>
+
+
 
 </div>
 @endsection

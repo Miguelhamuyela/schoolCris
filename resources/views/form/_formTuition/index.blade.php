@@ -14,7 +14,7 @@
                     @foreach ($registrations as $item)
 
 
-                    <option value="{{ $item->students->id }}" {{ isset($tuition) && $tuition->students->id == $item->students->id ? 'selected' : (old('fk_students_id') == $item->students->id ? 'selected' : '') }}> {{ $item->students->name }} </option>
+                    <option value="{{ isset($item->students) ? $item->students->id : '' }}" {{ isset($tuition->students) && isset($item->students) && $tuition->students->id == $item->students->id ? 'selected' : (old('fk_students_id') == (isset($item->students) ? $item->students->id : '') ? 'selected' : '') }}> {{ isset($item->students) ? $item->students->name : 'Não informado' }} </option>
 
 
                         {{--  <option value="{{ $item->id }}"
@@ -29,15 +29,9 @@
     </div>
 
     <div class="col-md-4 py-2">
-        <label for="fk_schoolyears_id">Escolha o Ano lectivo</label>
-        <select class="form-control" name="fk_schoolyears_id" id="fk_schoolyears_id" required>
-            <option {{ isset($tuition) ? '' : 'selected' }}></option>
-            @foreach ($schoolyears as $schoolyear)
-                <option value="{{ $schoolyear->id }}"
-                    {{ isset($tuition) && $tuition->schoolyears->id == $schoolyear->id ? 'selected' : (old('fk_schoolyears_id') == $schoolyear->id ? 'selected' : '') }}>
-                    {{ $schoolyear->name }}</option>
-            @endforeach
-        </select>
+        <label>Ano Lectivo</label>
+        <p class="form-control-plaintext">{{ $schoolyearName ?? \App\Helpers\SchoolYearHelper::getCurrentSchoolYearName() }}</p>
+        <input type="hidden" name="fk_schoolyears_id" value="{{ old('fk_schoolyears_id', isset($tuition) ? $tuition->fk_schoolyears_id : \App\Helpers\SchoolYearHelper::getCurrentSchoolYearId()) }}">
     </div>
 
     <div class="col-md-4 py-2">
@@ -77,9 +71,29 @@
     </div>
 
     <div class="col-md-4 py-2">
-        <label for="price">Digite o preço</label>
-        <input class="form-control" type="text" name="price" id="price" placeholder="Preço do mês"
-            value="{{ isset($tuition->price) ? $tuition->price : old('price') }}">
+        <label for="price">Valor da Propina</label>
+        <select class="form-control" name="price" id="price" required>
+            <option {{ isset($tuition) ? '' : 'selected' }} value="">Selecione o valor</option>
+            @php
+                $precos = ['27000', '30000', '32000', '36000', '40000', '60000'];
+                $selectedPrice = isset($tuition) ? $tuition->price : old('price');
+            @endphp
+            @foreach ($precos as $preco)
+                <option value="{{ $preco }}" {{ $selectedPrice == $preco ? 'selected' : '' }}>
+                    {{ number_format($preco, 2, ',', '.') }} Kz
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="col-md-4 py-2">
+        <label for="fine">Multa</label>
+        <select class="form-control" name="fine" id="fine" required>
+            <option {{ !isset($tuition) || (isset($tuition) && $tuition->fine == 0) ? 'selected' : '' }} value="0">Sem Multa</option>
+            <option value="6000" {{ (isset($tuition) && $tuition->fine == 6000) || old('fine') == '6000' ? 'selected' : '' }}>
+                6.000,00 Kz
+            </option>
+        </select>
     </div>
 
 

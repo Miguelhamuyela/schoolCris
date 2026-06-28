@@ -10,7 +10,7 @@ class Log extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'logs';
+    protected $table = 'registos';
 
     public $guarded = ['id'];
      /**

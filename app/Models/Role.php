@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Role extends Model
 {
     use HasFactory;
-    public $table = "roles";
+    public $table = "papeis";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];
@@ -19,6 +19,6 @@ class Role extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'users_roles', 'fk_users_id', 'fk_roles_id');
+        return $this->belongsToMany(User::class, 'usuarios_papeis', 'fk_users_id', 'fk_roles_id');
     }
 }

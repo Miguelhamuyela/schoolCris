@@ -13,7 +13,7 @@ class CreateExamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('exames', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('season');
@@ -22,19 +22,16 @@ class CreateExamsTable extends Migration
             $table->dateTime('end');
 
             $table->unsignedBigInteger('fk_teachers_id');
-            $table->foreign('fk_teachers_id')->references('id')->on('teachers')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_teachers_id')->references('id')->on('docentes')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_classes_id');
-            $table->foreign('fk_classes_id')->references('id')->on('classes')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_classes_id')->references('id')->on('turmas')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_courses_id');
-            $table->foreign('fk_courses_id')->references('id')->on('courses')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_courses_id')->references('id')->on('cursos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_grades_id');
-            $table->foreign('fk_grades_id')->references('id')->on('grades')->onDelete('CASCADE')->onUpgrade('CASCADE');
-
-            $table->unsignedBigInteger('fk_subjects_id');
-            $table->foreign('fk_subjects_id')->references('id')->on('subjects')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_grades_id')->references('id')->on('niveis')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->timestamps();
             $table->softDeletes();
@@ -48,6 +45,6 @@ class CreateExamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exams');
+        Schema::dropIfExists('exames');
     }
 }

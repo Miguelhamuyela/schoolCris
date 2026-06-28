@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>SEGURANÇA & COMUNICAÇÃO</h1>
+  <div class="mermaid">
+    erDiagram
+      papeis {
+            bigint id PK
+            string name
+          }
+      
+          usuarios_papeis {
+            bigint id PK
+            bigint fk_users_id FK
+            bigint fk_roles_id FK
+          }
+      
+          mensagens {
+            bigint id PK
+            bigint sender_id FK
+            bigint receiver_id FK
+            string subject
+            text body
+            boolean read
+            timestamp read_at "nullable"
+          }
+      
+          regras {
+            bigint id PK
+            string name
+            string details
+          }
+      
+          usuarios ||--o{ usuarios_papeis : ""
+          papeis ||--o{ usuarios_papeis : ""
+      
+          usuarios ||--o{ mensagens : "sender"
+          usuarios ||--o{ mensagens : "receiver"
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

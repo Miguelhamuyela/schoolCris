@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CourseClasseGradeStudentSchoolyear extends Model
 {
     use HasFactory;
-    public $table = "registrations";
+    public $table = "matriculas";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];

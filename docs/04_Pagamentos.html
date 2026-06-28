@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>PAGAMENTOS</h1>
+  <div class="mermaid">
+    erDiagram
+      propinas {
+            bigint id PK
+            string month
+            bigint price
+            decimal fine
+            string state
+            bigint fk_students_id FK
+            bigint fk_schoolyears_id FK
+          }
+      
+          pagamentos_transportes {
+            bigint id PK
+            string month
+            bigint price
+            string state
+            bigint fk_students_id FK
+            bigint fk_schoolyears_id FK
+            bigint fk_transports_id FK
+          }
+      
+          pagamentos_uniformes {
+            bigint id PK
+            bigint price
+            string state
+            bigint fk_students_id FK
+            bigint fk_schoolyears_id FK
+          }
+      
+          transportes {
+            bigint id PK
+            string plate
+            string model
+            integer capacity
+            string route
+            string state
+            string safe
+            string documentation
+            string details
+          }
+      
+          alunos ||--o{ propinas : ""
+          anos_lectivos ||--o{ propinas : ""
+      
+          alunos ||--o{ pagamentos_transportes : ""
+          anos_lectivos ||--o{ pagamentos_transportes : ""
+          transportes ||--o{ pagamentos_transportes : ""
+      
+          alunos ||--o{ pagamentos_uniformes : ""
+          anos_lectivos ||--o{ pagamentos_uniformes : ""
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

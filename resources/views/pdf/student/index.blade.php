@@ -1,83 +1,73 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('pdf.layouts.report-header')
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lista de Maticulados-{{ date('d/m/Y', strtotime(now())) }}</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+@section('title', 'Lista de Alunos')
+@section('report-title', 'LISTA DE ALUNOS')
+@section('report-subtitle')
+    ANO LETIVO: {{ isset($schoolyear) && !empty($schoolyear) ? $schoolyear : 'TODOS' }}
+    @if(isset($grade) && !empty($grade))
+    - CLASSE: {{ $grade }}
+    @endif
+    @if(isset($course) && !empty($course))
+    - CURSO: {{ $course }}
+    @endif
+    @if(isset($classe) && !empty($classe))
+    - TURMA: {{ $classe }}
+    @endif
+@endsection
 
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        header {
-            text-align: center;
-            padding: 1.5rem;
-        }
-    </style>
-</head>
-
-<body>
-    <header class="header">
-        <div class="img">
-            <img src="dashboard/assets/img/insignia.png" alt="">
+@section('content')
+<div class="main">
+    @if ($students->count() <= 0)
+        <div class="alert alert-warning text-center">
+            Nenhum aluno encontrado com os filtros selecionados.
         </div>
-        <div class="text-center">DIOCESE DE BENGUELA</div>
-        <div class="text-center"> SEMINÁRIO MAIOR DO BOM PASTOR</div>
-        <div class="text-center">LISTA DE ALUNOS INSCRITOS DO ANO DE "{{ $schoolyear  }}"</div>
-    </header>
-
-    <main>
-        <div class="main">
-            <table class="table">
-                <thead>
+    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>NOME</th>
+                    <th>Nº PROCESSO</th>
+                    <th>Nº BI</th>
+                    <th>ANO LETIVO</th>
+                    <th>CONTACTO</th>
+                    @if(isset($registrations))
+                    <th>CURSO</th>
+                    <th>CLASSE</th>
+                    <th>TURMA</th>
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($students as $item)
                     <tr>
-                        <th>#</th>
-                        <th>NOME</th>
-                        <th>Nº de PROC</th>
-                        <th>Nº B.I/PASSAPORTE</th>
-                        <th>ANO LECTIVO</th>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->nProcess }}</td>
+                        <td>{{ $item->nBi }}</td>
+                        <td>{{ $item->schoolyear }}</td>
+                        <td>{{ $item->contact }}</td>
+                        @if(isset($registrations))
+                        <td>
+                            @php
+                                $registration = $registrations->where('fk_students_id', $item->id)->first();
+                            @endphp
+                            {{ $registration ? $registration->courses->name : 'N/A' }}
+                        </td>
+                        <td>
+                            {{ $registration ? $registration->grades->name : 'N/A' }}
+                        </td>
+                        <td>
+                            {{ $registration ? $registration->classes->name : 'N/A' }}
+                        </td>
+                        @endif
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($students as $item)
-                        <tr>
-                            <td scope="row">{{ $loop->index + 1 }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->nProcess }}</td>
-                            <td>{{ $item->nBi }}</td>
-                            <td>{{ $item->schoolyear }} </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="text-right mt-3">
+            <p>Total de alunos: {{ $students->count() }}</p>
         </div>
-    </main>
-    <hr class="pylarge bg-dark">
-    <footer class="col-12 mt-2 text-center" id="footer">
-
-        <small class="text-left text-dark">
-            Documento Processado por Computador. <br>
-        </small>
-
-    </footer>
-
-
-</body>
-
-</html>
+    @endif
+</div>
+@endsection

@@ -56,18 +56,6 @@
     </div>
 
     <div class="col-md-4 py-2">
-        <label for="fk_subjects_id">Escolhe a Disciplina</label>
-        <select class="form-control" name="fk_subjects_id" id="fk_subjects_id" required>
-            <option {{ isset($exam) ? '' : 'selected' }}></option>
-            @foreach ($subjects as $subject)
-                <option value="{{ $subject->id }}"
-                    {{ isset($exam) && $exam->subjects->id == $subject->id ? 'selected' : ((old('fk_subjects_id') == $subject->id) ? 'selected' : '') }}>
-                    {{ $subject->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="col-md-4 py-2">
         <label for="season">Escolhe o período</label>
         <select class="form-control" name="season" id="season" required>
             <option></option>

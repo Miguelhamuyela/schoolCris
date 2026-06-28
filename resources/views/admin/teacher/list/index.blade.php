@@ -5,6 +5,12 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Lista de Professores</h1>
+            
+            @canStructuralActions
+            <a href="{{ route('admin.teacher.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-plus fa-sm text-white-50"></i> Registrar Professor
+            </a>
+            @endcanStructuralActions
         </div>
 
         <!-- DataTales Example -->
@@ -45,12 +51,13 @@
                                                 aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.teacher.show', $teacher->id) }}">Detalhes</a>
+                                                
+                                                @canStructuralActions
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.teacher.edit', $teacher->id) }}">Editar</a>
                                                 <a class="dropdown-item delete-button" href="#"
                                                     data-based-id="{{ route('admin.teacher.destroy', $teacher->id) }}">Remover</a>
-
-
+                                                @endcanStructuralActions
                                             </div>
                                         </div>
                                     </td>
@@ -62,8 +69,5 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 @endsection('content')

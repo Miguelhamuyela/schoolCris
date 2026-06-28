@@ -6,7 +6,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Todos direitos Reservados &copy; Seminário Maior de Benguela-2024</span>
+            <span>Instituto Politécnico Privado Pitágoras de Samos &copy; {{ date('Y') }}</span>
         </div>
     </div>
 </footer>
@@ -43,9 +43,7 @@
     </div>
 </div>
 
-
 <!-- Carregue primeiro os scripts do Bootstrap e do jQuery -->
-
 <script src="/dashboard/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/dashboard/assets/js/jquery-ui.min.js"></script>
 <script src="/dashboard/assets/js/moment.min.js"></script>
@@ -53,11 +51,9 @@
 
 <script>
     $(function() {
-
         $('#calendar').fullCalendar({
             lang: 'pt-br'
         });
-
     });
 </script>
 
@@ -68,19 +64,19 @@
 <!-- Depois, os plugins -->
 <script src="/dashboard/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="/dashboard/assets/vendor/chart.js/Chart.min.js"></script>
-<script src="/dashboard/assets/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/dashboard/assets/vendor/datatables/Portuguese-Brasil.json"></script>
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable({
-            language: {
-                url: "/dashboard/assets/vendor/datatables/Portuguese-Brasil.json"
-            }
-        });
-    });
-</script>
 
+<!-- DataTables -->
+<script src="/dashboard/assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/dashboard/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/jszip.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/pdfmake.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/vfs_fonts.js"></script>
+<script src="/dashboard/assets/vendor/datatables/buttons.html5.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/buttons.print.min.js"></script>
+<script src="/dashboard/assets/vendor/datatables/buttons.colVis.min.js"></script>
+
 <script src="/dashboard/assets/js/sweetalert2.all.min.js"></script>
 <!-- E, finalmente, os scripts personalizados -->
 <script src="/dashboard/assets/js/demo/chart-area-demo.js"></script>
@@ -88,7 +84,12 @@
 <script src="/dashboard/assets/js/demo/datatables-demo.js"></script>
 <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
 <script src="/dashboard/assets/js/jquery.validate.min.js"></script>
+<!-- Dark Mode Script -->
+<script src="/dashboard/assets/js/dark-mode.js"></script>
+<!-- Custom Forms Script -->
+<script src="/dashboard/assets/js/custom-forms.js"></script>
 
+@stack('js')
 
 </main>
 
@@ -96,40 +97,115 @@
     <script>
         Swal.fire({
             icon: 'success',
-            title: 'Cadastrado com sucesso!',
-            showConfirmButton: true
+            title: 'Operação realizada com sucesso!',
+            html: '<div class="swal-text-container"><p>Os dados foram cadastrados no sistema</p></div>',
+            showConfirmButton: true,
+            confirmButtonText: "{{ session('student_card_url') ? 'Abrir cartao' : 'Continuar' }}",
+            confirmButtonColor: '#4e73df',
+            showCancelButton: {{ session('student_card_url') ? 'true' : 'false' }},
+            cancelButtonText: 'Continuar',
+            cancelButtonColor: '#858796',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button',
+                cancelButton: 'custom-swal-cancel-button'
+            },
+            backdrop: `
+                rgba(38, 52, 86, 0.7)
+            `,
+            timer: 3000,
+            timerProgressBar: true
+        }).then((result) => {
+            @if(session('student_card_url'))
+                if (result.isConfirmed) {
+                    window.open(@json(session('student_card_url')), '_blank');
+                }
+            @endif
         })
     </script>
 @elseif(session('destroy'))
     <script>
         Swal.fire({
             icon: 'info',
-            title: 'Eliminado com sucesso!',
-            showConfirmButton: true
+            title: 'Registro removido',
+            html: '<div class="swal-text-container"><p>O registro foi excluído com sucesso</p></div>',
+            showConfirmButton: true,
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#4e73df',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button'
+            },
+            backdrop: `
+                rgba(38, 52, 86, 0.7)
+            `,
+            timer: 3000,
+            timerProgressBar: true
         })
     </script>
 @elseif(session('error_password'))
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'A password atual está incorrecta!',
-            showConfirmButton: true
+            title: 'Senha incorreta',
+            html: '<div class="swal-text-container"><p>A senha atual informada está incorreta</p></div>',
+            showConfirmButton: true,
+            confirmButtonText: 'Tentar novamente',
+            confirmButtonColor: '#e74a3b',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button'
+            }
         })
     </script>
 @elseif(session('error_Repassword'))
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'As passwords não coecidem!',
-            showConfirmButton: true
+            title: 'Senhas não coincidem',
+            html: '<div class="swal-text-container"><p>As senhas informadas não são idênticas</p></div>',
+            showConfirmButton: true,
+            confirmButtonText: 'Tentar novamente',
+            confirmButtonColor: '#e74a3b',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button'
+            }
         })
     </script>
 @elseif(session('edit'))
     <script>
         Swal.fire({
             icon: 'success',
-            title: 'Alterações foram salvas com sucesso!',
-            showConfirmButton: true
+            title: 'Alterações salvas',
+            html: '<div class="swal-text-container"><p>Todas as alterações foram salvas com sucesso</p></div>',
+            showConfirmButton: true,
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: '#4e73df',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button'
+            },
+            backdrop: `
+                rgba(38, 52, 86, 0.7)
+            `,
+            timer: 3000,
+            timerProgressBar: true
         })
     </script>
 @elseif(session('create_image'))
@@ -235,9 +311,16 @@
             timer: 4500
         })
     </script>
+@elseif(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('error') }}',
+            showConfirmButton: true,
+            timer: 6000
+        })
+    </script>
 @endif
-
-
 
 <script>
     $('.delete-button').click(function(event) {
@@ -250,12 +333,25 @@
         var dadoId = $(this).data('based-id');
         Swal.fire({
             title: 'Tem certeza?',
-            text: "Você não poderá desfazer esta ação!",
+            text: "Esta ação não poderá ser revertida!",
             icon: 'warning',
+            iconColor: '#f6c23e',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim, deletar!'
+            confirmButtonColor: '#4e73df',
+            cancelButtonColor: '#e74a3b',
+            confirmButtonText: 'Sim, excluir',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                container: 'custom-swal-container',
+                popup: 'animated fadeInUp faster',
+                title: 'custom-swal-title',
+                htmlContainer: 'custom-swal-html',
+                confirmButton: 'custom-swal-confirm-button',
+                cancelButton: 'custom-swal-cancel-button'
+            },
+            backdrop: `
+                rgba(38, 52, 86, 0.7)
+            `
         }).then((result) => {
             if (result.isConfirmed) {
                 // Faz a requisição AJAX para o controlador com o ID do aluno
@@ -263,21 +359,41 @@
                     url: dadoId,
                     type: 'DELETE',
                     success: function(response) {
-                        Swal.fire(
-                            'Deletado!',
-                            'O registro foi deletado.',
-                            'success'
-                        ).then(() => {
+                        Swal.fire({
+                            title: 'Excluído!',
+                            html: '<div class="swal-text-container"><p>O registro foi excluído com sucesso</p></div>',
+                            icon: 'success',
+                            confirmButtonColor: '#4e73df',
+                            confirmButtonText: 'Continuar',
+                            customClass: {
+                                container: 'custom-swal-container',
+                                popup: 'animated fadeInUp faster',
+                                title: 'custom-swal-title',
+                                htmlContainer: 'custom-swal-html',
+                                confirmButton: 'custom-swal-confirm-button'
+                            },
+                            timer: 2000,
+                            timerProgressBar: true
+                        }).then(() => {
                             // Recarrega a página após a exclusão
                             location.reload();
                         });
                     },
                     error: function(xhr, status, error) {
-                        Swal.fire(
-                            'Erro!',
-                            'Ocorreu um erro ou o dado não pode ser deletado.',
-                            'error'
-                        );
+                        Swal.fire({
+                            title: 'Erro!',
+                            html: '<div class="swal-text-container"><p>Ocorreu um erro ao excluir o registro</p></div>',
+                            icon: 'error',
+                            confirmButtonColor: '#e74a3b',
+                            confirmButtonText: 'Entendi',
+                            customClass: {
+                                container: 'custom-swal-container',
+                                popup: 'animated fadeInUp faster',
+                                title: 'custom-swal-title',
+                                htmlContainer: 'custom-swal-html',
+                                confirmButton: 'custom-swal-confirm-button'
+                            }
+                        });
                     }
                 });
             }
@@ -285,13 +401,12 @@
     });
 </script>
 
-
-
 <!-- SCRIPTS -->
 <!-- Global Required Scripts Start -->
 <script></script>
 
-
+<!-- Scripts personalizados para páginas específicas -->
+@yield('scripts')
 
 </body>
 

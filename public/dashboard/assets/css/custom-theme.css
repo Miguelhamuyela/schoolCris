@@ -1,0 +1,342 @@
+/* Arquivo vazio - revertendo alterações */ 
+
+:root {
+    --blue: #FF8000;
+    --indigo: #FF6600;
+    --purple: #FF7722;
+    --orange: #FF5500;
+    --primary: #FF8000;
+    --primary-darker: #E67300;
+}
+
+/* Cor de texto e links */
+a {
+    color: var(--primary);
+}
+
+a:hover {
+    color: var(--primary-darker);
+}
+
+/* Botões e backgrounds */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: var(--primary-darker) !important;
+    border-color: var(--primary-darker) !important;
+}
+
+.bg-primary, .bg-gradient-primary {
+    background-color: var(--primary) !important;
+    background-image: linear-gradient(180deg, var(--primary) 10%, var(--primary-darker) 100%) !important;
+}
+
+/* Navbar e Sidebar */
+.sidebar .sidebar-brand {
+    background-color: var(--primary-darker);
+}
+
+.sidebar .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-item.active .nav-link {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.sidebar .nav-item .nav-link:hover {
+    color: #fff !important;
+}
+
+.sidebar .nav-item .nav-link i {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.sidebar .nav-item.active .nav-link i,
+.sidebar .nav-item .nav-link:hover i {
+    color: #fff !important;
+}
+
+/* Badges, borders e outros elementos */
+.badge-primary {
+    background-color: var(--primary);
+}
+
+.border-left-primary {
+    border-left: 0.25rem solid var(--primary) !important;
+}
+
+.border-bottom-primary {
+    border-bottom: 0.25rem solid var(--primary) !important;
+}
+
+.progress-bar {
+    background-color: var(--primary);
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+/* Cards e dropdowns */
+.card .card-header {
+    background-color: rgba(255, 128, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 128, 0, 0.2);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: var(--primary);
+}
+
+/* Paginação */
+.page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.page-link {
+    color: var(--primary);
+}
+
+.page-link:hover {
+    color: var(--primary-darker);
+}
+
+/* Botões outline */
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Form controls */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--primary);
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--primary);
+}
+
+/* Tabelas */
+.table-primary, .table-primary > th, .table-primary > td {
+    background-color: rgba(255, 128, 0, 0.1);
+}
+
+.table-hover .table-primary:hover {
+    background-color: rgba(255, 128, 0, 0.2);
+}
+
+/* Outros elementos */
+.list-group-item.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: var(--primary);
+}
+
+/* Adicione estilos personalizados aqui */
+
+/* Estilos personalizados para SweetAlert */
+.custom-swal-container {
+    z-index: 1060;
+}
+
+.custom-swal-title {
+    font-size: 1.6rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.custom-swal-html {
+    font-size: 1.1rem !important;
+    color: #4e5c68 !important;
+}
+
+.swal-text-container {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.swal-text-container p {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.custom-swal-confirm-button {
+    padding: 0.6rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    box-shadow: 0 3px 6px rgba(78, 115, 223, 0.3) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.custom-swal-confirm-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 12px rgba(78, 115, 223, 0.4) !important;
+}
+
+/* Estilos adicionais para botões de confirmação com opção de cancelar */
+.custom-swal-cancel-button {
+    padding: 0.6rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    box-shadow: 0 3px 6px rgba(231, 74, 59, 0.3) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.custom-swal-cancel-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 12px rgba(231, 74, 59, 0.4) !important;
+}
+
+/* Animações para SweetAlert */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animated {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+.faster {
+    animation-duration: 0.3s;
+}
+
+/* Estilização do ícone de sucesso */
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-success-fix {
+    background-color: transparent !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #4e73df !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(78, 115, 223, 0.3) !important;
+}
+
+.swal2-icon.swal2-success [class^=swal2-success-line] {
+    background-color: #4e73df !important;
+}
+
+/* Estilização da barra de progresso */
+.swal2-timer-progress-bar {
+    background: linear-gradient(to right, #4e73df, #36b9cc) !important;
+    height: 0.25rem !important;
+}
+
+/* Estilização melhorada do ícone de alerta */
+.swal2-icon.swal2-warning {
+    border-color: #f6c23e !important;
+}
+
+/* Estilização melhorada do ícone de erro */
+.swal2-icon.swal2-error {
+    border-color: #e74a3b !important;
+}
+
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: #e74a3b !important;
+}
+
+/* ==========================================================
+   MODERN UI UPGRADES (Tipografia, Sombras e Micro-interações)
+   ========================================================== */
+
+body, .sidebar .nav-item .nav-link, .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Modernização de Cartões (Cards) */
+.card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09) !important;
+}
+
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+}
+
+/* Modernização de Botões */
+.btn {
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 128, 0, 0.2) !important;
+}
+
+/* Modernização de Formulários (Inputs) */
+.form-control {
+    border-radius: 8px !important;
+    border: 1px solid #e3e6f0 !important;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out !important;
+}
+
+.form-control:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 128, 0, 0.2) !important;
+}
+
+/* Menus de Contexto (Dropdowns) */
+.dropdown-menu {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Tabelas e Sidebar */
+.sidebar {
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+.table-hover tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 128, 0, 0.05) !important;
+} 

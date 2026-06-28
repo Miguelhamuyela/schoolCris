@@ -19,16 +19,6 @@
         </select>
     </div>
 
-    <div class="col-md-6 py-2">
-        <label for="fk_subjects_id">Escolha a Disciplina</label>
-        <select class="form-control" name="fk_subjects_id" id="fk_subjects_id">
-            <option {{ isset($courseSubjectGrade) ? '' : 'selected' }}></option>
-            @foreach ($subjects as $subject)
-                <option value="{{ $subject->id }}" {{ (isset($courseSubjectGrade) && $courseSubjectGrade->subjects->id == $subject->id ) ? 'selected' : ((old('fk_subjects_id') == $subject->id) ? 'selected' : '') }}>{{ $subject->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
     <div class="col-md-6 py-2"></div>
 
     <div class="col-md-6 py-3">

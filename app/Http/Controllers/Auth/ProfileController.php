@@ -41,21 +41,31 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
-                'name.required' => 'O campo nome deve ser preenchido.',
-                'email.required' => 'O campo email deve ser preenchido.',
-                'email.email' => 'O campo email deve ser um e-mail válido.',
-            ]);
+            'name.required' => 'O campo nome deve ser preenchido.',
+            'email.required' => 'O campo email deve ser preenchido.',
+            'email.email' => 'O campo email deve ser um e-mail válido.',
+            'email.unique' => 'Este e-mail já está em uso por outro usuário.',
+            'image.image' => 'O arquivo selecionado deve ser uma imagem.',
+            'image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, gif.',
+            'image.max' => 'A imagem não pode ter mais de 2MB.',
+        ]);
 
-        $user = User::find($id)->update([
+        $dataToUpdate = [
             'name' => $request->name,
             'email' => $request->email,
-        ]);
+        ];
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $dataToUpdate['image'] = $request->file('image')->store('users', 'public');
+        }
+
+        User::find($id)->update($dataToUpdate);
 
         $this->Logger->log('info', 'Atualizou suas informações de perfil');
         return redirect()->back()->with('edit', '1');
-
     }
 
     //Controller da Password

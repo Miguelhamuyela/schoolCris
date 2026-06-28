@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>EXAMES & GRUPOS</h1>
+  <div class="mermaid">
+    erDiagram
+      exames {
+            bigint id PK
+            string name
+            string season
+            string duration
+            datetime start
+            datetime end
+            bigint fk_teachers_id FK
+            bigint fk_classes_id FK
+            bigint fk_courses_id FK
+            bigint fk_grades_id FK
+          }
+      
+          grupos_cursos {
+            bigint id PK
+            bigint fk_courses_id FK
+            bigint fk_grades_id FK
+            string letter
+          }
+      
+          cursos_disciplinas_niveis {
+            bigint id PK
+            bigint fk_courses_id FK
+            bigint fk_grades_id FK
+          }
+      
+          docentes ||--o{ exames : ""
+          turmas ||--o{ exames : ""
+          cursos ||--o{ exames : ""
+          niveis ||--o{ exames : ""
+      
+          cursos ||--o{ grupos_cursos : ""
+          niveis ||--o{ grupos_cursos : ""
+      
+          cursos ||--o{ cursos_disciplinas_niveis : ""
+          niveis ||--o{ cursos_disciplinas_niveis : ""
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

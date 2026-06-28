@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,21 +19,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Criar um usuário
-        $user = User::factory()->create();
+        $this->call(RoleSeeder::class);
 
-        // Criar os papéis desejados
-        $adminRole = Role::factory()->create(['name' => 'admin']);
-        Role::factory()->create(['name' => 'registrador']);
-        Role::factory()->create(['name' => 'gerenciador']);
+        // Criar/atualizar um utilizador admin fixo
+        $adminRole = Role::where('name', 'admin')->first();
+        $user = User::updateOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('12345678'),
+            ]
+        );
 
-        // Associar os papéis ao usuário
-        UserRole::factory()->create([
+        UserRole::firstOrCreate([
             'fk_users_id' => $user->id,
             'fk_roles_id' => $adminRole->id,
         ]);
 
-        // Schoolyear::factory()->create();
-        // Student::factory()->count(50)->create();
+        // Criar utilizador secretaria
+        $secretariaRole = Role::where('name', 'Secretaria')->first();
+        $secretariaUser = User::updateOrCreate(
+            ['email' => 'secretaria@admin.com'],
+            [
+                'name' => 'Secretaria',
+                'password' => Hash::make('12345678'),
+            ]
+        );
+        UserRole::firstOrCreate([
+            'fk_users_id' => $secretariaUser->id,
+            'fk_roles_id' => $secretariaRole->id,
+        ]);
     }
 }

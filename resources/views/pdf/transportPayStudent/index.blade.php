@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>transportPayStudent - {{ date('d-m-Y') }}</title>
+    <title>Recibo de Transporte - {{ date('d-m-Y') }}</title>
 
     <style>
         header {
@@ -35,13 +35,14 @@
 
 <body style='height:auto; width:100%; background: url("dashboard/images/digital.canvas.png") no-repeat center;'>
     <header class="header">
-        <div class="img">
-            <img src="dashboard/assets/img/insignia.png" alt="">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="{{ public_path('dashboard/assets/img/logo-sge-small.png') }}" alt="Logo da Escola" style="height: 80px;">
         </div>
-        <div class="text-center">república de angola</div>
-        <div class="text-center">ministério da educação</div>
-        <div class="text-center">sistema de gestão escolar</div>
-        <div class="text-center">lista de alunos inscritos do ano de "{{ $transportPayStudent->schoolyears->name }}"</div>
+        <div class="text-center">REPÚBLICA DE ANGOLA</div>
+        <div class="text-center">MINISTÉRIO DA EDUCAÇÃO</div>
+        <div class="text-center">SISTEMA DE GESTÃO ESCOLAR</div>
+        <div class="text-center">RECIBO DE PAGAMENTO DE TRANSPORTE</div>
+        <div class="text-center">ANO LECTIVO "{{ isset($transportPayStudent->schoolyears) ? $transportPayStudent->schoolyears->name : 'N/A' }}"</div>
     </header>
 
     <section class="">
@@ -58,10 +59,10 @@
 
                     <div style="display: inline-block;" class="mr-4">
                         <b>Nome do Aluno</b>
-                        <p>{{ $transportPayStudent->students->name }}</p>
+                        <p>{{ isset($transportPayStudent->students) ? $transportPayStudent->students->name : 'N/A' }}</p>
 
                         <b>Nº de Processo</b>
-                        <p>{{ $transportPayStudent->students->nProcess }}</p>
+                        <p>{{ isset($transportPayStudent->students) ? $transportPayStudent->students->nProcess : 'N/A' }}</p>
 
                     </div>
 
@@ -84,7 +85,7 @@
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                <td>{{ $transportPayStudent->schoolyears->name }}</td>
+                                <td>{{ isset($transportPayStudent->schoolyears) ? $transportPayStudent->schoolyears->name : 'N/A' }}</td>
                                 <td>{{ $transportPayStudent->month }}</td>
                                 <td>{!! number_format($transportPayStudent->price, 2, ',', '.') . ' ' . 'kz' !!}</td>
                                 <td>{{ $transportPayStudent->state }}</td>
@@ -103,7 +104,7 @@
     <footer class="col-12 mt-2 text-center" id="footer">
 
         <small class="text-left text-dark">
-            documento processado por computador. <br>
+            Documento processado por computador. <br>
         </small>
 
     </footer>

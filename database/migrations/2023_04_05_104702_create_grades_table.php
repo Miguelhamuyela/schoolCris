@@ -13,7 +13,7 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('niveis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('details', 500);
@@ -29,6 +29,6 @@ class CreateGradesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('niveis');
     }
 }

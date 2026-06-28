@@ -9,18 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TeacherSubjectClasseRuleSchoolyear extends Model
 {
     use HasFactory;
-    public $table = "contracts";
+    public $table = "contratos";
     protected $guarded = ['id'];
+    protected $fillable = ['fk_teachers_id', 'fk_classes_id', 'fk_rules_id', 'fk_schoolyears_id', 'season'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     public function teachers()
     {
         return $this->belongsTo(Teacher::class, 'fk_teachers_id');
-    }
-
-    public function subjects()
-    {
-        return $this->belongsTo(Subject::class, 'fk_subjects_id');
     }
 
     public function classes()

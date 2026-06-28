@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 20px; background: #fff; font-family: Arial, sans-serif; }
+    h1 { text-align: center; color: #1a1a2e; font-size: 24px; margin-bottom: 10px; }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body>
+  <h1>NÚCLEO ACADÉMICO</h1>
+  <div class="mermaid">
+    erDiagram
+      %% Entities
+          alunos {
+            bigint id PK
+            string name
+            string nProcess
+            string nBi UK
+            string father
+            string mother
+            string contact
+            string contactAlter
+            string email
+            string image "nullable"
+            date dateBirth
+            string schoolyear
+          }
+      
+          docentes {
+            bigint id PK
+            string nBi
+            string name
+            string email UK
+            string contact
+            string contactAlter
+            string literary
+            string specialty
+          }
+      
+          usuarios {
+            bigint id PK
+            string name
+            string email UK
+            timestamp email_verified_at "nullable"
+            string password
+            string image "nullable"
+          }
+      
+          cursos {
+            bigint id PK
+            string name
+            string details
+            string duration
+          }
+      
+          niveis {
+            bigint id PK
+            string name
+            string details
+          }
+      
+          turmas {
+            bigint id PK
+            string name
+            string details
+          }
+      
+          anos_lectivos {
+            bigint id PK
+            string name
+            string details
+          }
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', layout: 'elk' });</script>
+</body>
+</html>

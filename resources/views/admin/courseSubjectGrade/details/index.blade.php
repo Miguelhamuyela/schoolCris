@@ -29,16 +29,7 @@
 
                             <div class="row align-items-center">
 
-                                <div class="col-12 col-md-6 col-lg-4 mb-2">
-                                    <h5>
-                                        <b class="mb-1">Disciplina</b>
-                                    </h5>
-                                    <p class="text-dark">{{ $courseSubjectGrade->subjects->name }}</p>
                                 </div>
-
-
-
-                            </div>
                             <div class="row align-items-center">
                                 <div class="col-md-7 mb-2">
                                     <hr>

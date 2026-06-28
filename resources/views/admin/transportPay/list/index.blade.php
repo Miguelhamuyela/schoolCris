@@ -1,17 +1,17 @@
 @extends('layouts.merge.dashboard')
-@section('title', 'Lista de Pagamentos de Transporte')
+@section('title', 'Histórico de Pagamentos de Transporte')
 @section('content')
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Lista de Pagamentos de Transporte</h1>
+            <h1 class="h3 mb-0 text-gray-800">Histórico de Pagamentos de Transporte</h1>
         </div>
 
         <!-- DataTales Example -->
         <div class="card shadow">
             <div class="card-header">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h6 class="m-0 font-weight-bold text-primary">Pagamento de Transporte</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Registros de Pagamentos</h6>
                     <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                         data-toggle="modal" data-target="#myModal">
                         <i class="fas fa-file-pdf fa-sm text-white-50"></i> Factura Geral
@@ -87,7 +87,7 @@
 
                                                 @if ($transportPay->state == 'Pago')
                                                     <a class="dropdown-item"
-                                                        href="{{ route('pdf.transportPay.student', $transportPay->id) }}"
+                                                        href="{{ route('pdf.transportPayStudent', $transportPay->id) }}"
                                                         target="_blank">Factura</a>
                                                 @endif
 

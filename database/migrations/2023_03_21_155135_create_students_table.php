@@ -13,10 +13,10 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('alunos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('nProcess');
+            $table->string('nProcess', 20)->nullable();
             $table->string('nBi')->unique();
             $table->string('father');
             $table->string('mother');
@@ -25,6 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->date('dateBirth');
             $table->string('schoolyear');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
             
@@ -34,6 +35,6 @@ class CreateStudentsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('alunos');
     }
 }

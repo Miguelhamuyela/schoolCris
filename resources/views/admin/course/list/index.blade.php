@@ -5,6 +5,12 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Lista de Cursos</h1>
+            
+            @canStructuralActions
+            <a href="{{ route('admin.course.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-plus fa-sm text-white-50"></i> Adicionar Curso
+            </a>
+            @endcanStructuralActions
         </div>
 
         <!-- DataTales courseple -->
@@ -39,12 +45,13 @@
                                                 aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.course.show', $course->id) }}">Detalhes</a>
+                                                
+                                                @canStructuralActions
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.course.edit', $course->id) }}">Editar</a>
                                                 <a class="dropdown-item delete-button" href="#"
                                                     data-based-id="{{ route('admin.course.destroy', $course->id) }}">Remover</a>
-
-
+                                                @endcanStructuralActions
                                             </div>
                                         </div>
                                     </td>
@@ -56,8 +63,5 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 @endsection('content')

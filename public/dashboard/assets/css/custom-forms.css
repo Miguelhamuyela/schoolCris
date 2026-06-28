@@ -1,0 +1,144 @@
+/* Estilos personalizados para áreas de texto de detalhes e descrições */
+
+/* Estilização básica para textareas */
+textarea.form-control {
+    border: none !important;
+    border-radius: 0.5rem !important;
+    background-color: #f8f9fc !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    transition: all 0.3s ease !important;
+    resize: vertical !important;
+    min-height: 120px !important; 
+}
+
+/* Efeito de foco */
+textarea.form-control:focus {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(78, 115, 223, 0.15) !important;
+    border-left: 4px solid #4e73df !important; 
+}
+
+/* Container estilizado para textarea */
+.details-container {
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem !important;
+}
+
+/* Classe opcional para adicionar margem inferior */
+.details-container.with-margin {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Estado de foco para o container */
+.details-container.focused {
+    background-color: rgba(78, 115, 223, 0.05) !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 0 0 2px rgba(78, 115, 223, 0.1) !important;
+}
+
+/* Título do campo */
+.details-container label {
+    font-weight: 600 !important;
+    color: #4e73df !important;
+    font-size: 0.9rem !important;
+    display: inline-block !important;
+    margin-bottom: 0.5rem !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+}
+
+.details-container label::after {
+    content: '' !important;
+    display: block !important;
+    width: 2rem !important;
+    height: 2px !important;
+    background-color: #4e73df !important;
+    margin-top: 3px !important;
+    opacity: 0.7 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Efeito no título durante o foco */
+.details-container.focused label {
+    color: #2e59d9 !important;
+    transform: translateY(-2px) !important;
+}
+
+.details-container.focused label::after {
+    width: 100% !important;
+    opacity: 0.9 !important;
+}
+
+/* Decoração do container */
+.details-container::before {
+    content: '\f4ad' !important;
+    font-family: 'Font Awesome 5 Free' !important;
+    position: absolute !important;
+    right: 1rem !important;
+    top: 2.5rem !important;
+    color: rgba(78, 115, 223, 0.3) !important;
+    font-size: 1.5rem !important;
+    z-index: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Efeito no ícone durante o foco */
+.details-container.focused::before {
+    color: rgba(78, 115, 223, 0.6) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Contador de caracteres (opcional) */
+.char-counter {
+    position: absolute !important;
+    bottom: 0.5rem !important;
+    right: 1rem !important;
+    font-size: 0.75rem !important;
+    color: #858796 !important;
+    transition: all 0.3s ease !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Efeito no contador durante o foco */
+.details-container.focused .char-counter {
+    color: #4e73df !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 2px 5px rgba(78, 115, 223, 0.15) !important;
+}
+
+/* Estilo de placeholder */
+textarea.form-control::placeholder {
+    color: #b7b9cc !important;
+    font-style: italic !important;
+    opacity: 0.7 !important;
+}
+
+/* Classes adicionais para diferentes tamanhos */
+textarea.form-control.size-sm {
+    min-height: 80px !important;
+}
+
+textarea.form-control.size-lg {
+    min-height: 180px !important;
+}
+
+/* Estilização para estado de erro */
+textarea.form-control.is-invalid {
+    border-left: 4px solid #e74a3b !important;
+    background-color: rgba(231, 74, 59, 0.05) !important;
+}
+
+/* Estilização para estado de sucesso */
+textarea.form-control.is-valid {
+    border-left: 4px solid #1cc88a !important;
+    background-color: rgba(28, 200, 138, 0.05) !important;
+} 

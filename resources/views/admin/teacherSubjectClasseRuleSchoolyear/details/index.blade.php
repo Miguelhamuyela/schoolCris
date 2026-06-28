@@ -30,23 +30,9 @@
                             <div class="row align-items-center">
                                 <div class="col-12 col-md-6 col-lg-4 mb-2">
                                     <h5>
-                                        <b class="mb-1">Cargo</b>
+                                        <b class="mb-1">Professor</b>
                                     </h5>
-                                    <p class="text-dark">{{ $teacherSubjectClasseRuleSchoolyear->rules->name }}</p>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 mb-2">
-                                    <h5>
-                                        <b class="mb-1">Turma</b>
-                                    </h5>
-                                    <p class="text-dark">{{ $teacherSubjectClasseRuleSchoolyear->classes->name }}</p>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 mb-2">
-                                    <h5>
-                                        <b class="mb-1">Disciplina</b>
-                                    </h5>
-                                    <p class="text-dark">{{ $teacherSubjectClasseRuleSchoolyear->subjects->name }}</p>
+                                    <p class="text-dark">{{ $teacherSubjectClasseRuleSchoolyear->teachers->name }}</p>
                                 </div>
 
                                 <div class="col-12 col-md-6 col-lg-4 mb-2">

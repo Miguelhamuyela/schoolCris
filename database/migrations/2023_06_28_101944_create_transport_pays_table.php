@@ -13,20 +13,20 @@ class CreateTransportPaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('transport_pays', function (Blueprint $table) {
+        Schema::create('pagamentos_transportes', function (Blueprint $table) {
             $table->id();
             $table->string('month');
             $table->bigInteger('price');
             $table->string('state');
 
             $table->unsignedBigInteger('fk_students_id');
-            $table->foreign('fk_students_id')->references('id')->on('students')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_students_id')->references('id')->on('alunos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_schoolyears_id');
-            $table->foreign('fk_schoolyears_id')->references('id')->on('schoolyears')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_schoolyears_id')->references('id')->on('anos_lectivos')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
             $table->unsignedBigInteger('fk_transports_id');
-            $table->foreign('fk_transports_id')->references('id')->on('transports')->onDelete('CASCADE')->onUpgrade('CASCADE');
+            $table->foreign('fk_transports_id')->references('id')->on('transportes')->onDelete('CASCADE')->onUpgrade('CASCADE');
 
 
             $table->softDeletes();
@@ -41,6 +41,6 @@ class CreateTransportPaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transport_pays');
+        Schema::dropIfExists('pagamentos_transportes');
     }
 }

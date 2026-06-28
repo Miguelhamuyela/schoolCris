@@ -9,23 +9,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Rule extends Model
 {
     use HasFactory;
-    public $table = "rules";
+    public $table = "regras";
     protected $guarded = ['id'];
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'teachers_rules');
+        return $this->belongsToMany(Teacher::class, 'docentes_regras');
     }
 
     public function classes()
     {
-        return $this->belongsToMany(Classe::class, 'contracts');
+        return $this->belongsToMany(Classe::class, 'contratos');
     }
 
     public function schoolyears()
     {
-        return $this->belongsToMany(Schoolyear::class, 'contracts');
+        return $this->belongsToMany(Schoolyear::class, 'contratos');
     }
 }

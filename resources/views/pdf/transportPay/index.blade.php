@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lista de Maticulados-{{ date('d/m/Y', strtotime(now())) }}</title>
+    <title>Lista de Pagamentos de Transporte-{{ date('d/m/Y', strtotime(now())) }}</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -33,14 +33,17 @@
 </head>
 
 <body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ public_path('dashboard/assets/img/logo-sge-small.png') }}" alt="Logo da Escola" style="height: 80px;">
+    </div>
     <header class="header">
-        <div class="img">
-            <img src="dashboard/assets/img/insignia.png" alt="">
+        <div class="img text-center">
+            <img src="{{ asset('dashboard/assets/img/logo-sge-small.png') }}" alt="Logo" style="max-width: 100px;">
         </div>
         <div class="text-center">REPÚBLICA DE ANGOLA</div>
         <div class="text-center">MINISTÉRIO DA EDUCAÇÃO</div>
         <div class="text-center">SISTEMA DE GESTÃO ESCOLAR</div>
-        <div class="text-center">LISTA DE PAGAMENTOS DE PROPINAs</div>
+        <div class="text-center">LISTA DE PAGAMENTOS DE TRANSPORTE</div>
         <div class="text-center">MÊS DE "<b>{{ $month }}</b>"</div>
         <div class="text-center">ANO LECTIVO "<b>{{ $schoolyear }}</b>", </div>
     </header>
@@ -69,9 +72,9 @@
                         @else
                             <tr>
                                 <td scope="row">{{ $loop->index + 1 }}</td>
-                                <td>{{ $item->students->name }}</td>
-                                <td>{{ $item->students->nProcess }}</td>
-                                <td>{{ $item->schoolyears->name }} </td>
+                                <td>{{ $item->students ? $item->students->name : 'N/A' }}</td>
+                                <td>{{ $item->students ? $item->students->nProcess : 'N/A' }}</td>
+                                <td>{{ $item->schoolyears ? $item->schoolyears->name : 'N/A' }}</td>
                                 <td>{!! number_format($item->price, 2, ',', '.') . ' ' . 'kz' !!}</td>
                                 <td>{{ $item->state }}</td>
                             </tr>

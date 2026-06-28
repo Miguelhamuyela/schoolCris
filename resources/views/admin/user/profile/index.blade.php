@@ -123,15 +123,13 @@
                                 @foreach (Auth::user()->roles as $item)
                                     @if ($item->name == 'admin')
                                         "ADMINISTRADOR"
-                                    @elseif($item->name == 'gerenciador')
-                                        "GESTOR"
-                                    @elseif($item->name == 'registrador')
-                                        "REGISTRADOR"
+                                    @elseif($item->name == 'Secretaria')
+                                        "SECRETARIA"
                                     @endif
                                 @endforeach
                             </h6>
                             <hr>
-                            <form action="{{ route('admin.profile.dados', Auth::user()->id) }}" method="POST">
+                            <form action="{{ route('admin.profile.dados', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nome Completo</label>
@@ -148,6 +146,16 @@
                                         value="{{ auth()->user()->email }}">
                                     <small id="fullEmailHelp" class="form-text text-muted">Seu email pode aparecer por
                                         aqui. Você pode alterá-lo.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Fotografia de Perfil</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                    @if(auth()->user()->hasValidImage())
+                                        <div class="mt-2">
+                                            <img src="{{ auth()->user()->profile_image_url }}" alt="Fotografia Atual"
+                                                style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+                                        </div>
+                                    @endif
                                 </div>
                                 <button type="submit" class="btn btn-primary">Atualizar Perfil</button>
                                 <button type="reset" class="btn btn-light">Redefinir alterações</button>

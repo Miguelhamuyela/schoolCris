@@ -27,6 +27,12 @@
                                         class="btn btn-md btn-primary shadow-sm text-end">Editar</a>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12 mb-4 ml-5">
+                                    <img src="{{ $user->profile_image_url }}" alt="Fotografia de Perfil"
+                                        style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 1px solid #ddd;">
+                                </div>
+                            </div>
 
 
                             <div class="row align-items-center">
